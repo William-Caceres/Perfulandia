@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String nombre;
     private String email;
