@@ -32,7 +32,7 @@ public class UsuarioController {
             Map<String, String > respuesta = new HashMap<>();
 
             if (user.isPresent()) {
-                respuesta.put("result", "Ok");
+                respuesta.put("result", "OK");
                 respuesta.put("nombre", user.get().getNombre());
             }
             else{
