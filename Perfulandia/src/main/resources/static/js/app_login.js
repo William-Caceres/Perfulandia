@@ -12,7 +12,7 @@ function login(){
     })
     .then(res => res.json())
     .then(data => {
-        if(data.result === "OK"){//Aqui quite un = extra, eran 3 ahora son 2
+        if(data.result === "OK"){
             sessionStorage.setItem("nombreUsuario", data.nombre);
             window.location.href = "/index.html";
         } else {
