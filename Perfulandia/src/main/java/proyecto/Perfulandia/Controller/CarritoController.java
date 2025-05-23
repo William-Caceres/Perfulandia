@@ -1,17 +1,18 @@
 package proyecto.Perfulandia.Controller;
 
-import proyecto.Perfulandia.Model.PerfumeModel;
-import proyecto.Perfulandia.Service.PerfumeService;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import proyecto.Perfulandia.Model.PerfumeModel;
+import proyecto.Perfulandia.Service.PerfumeService;
 
 
 
@@ -27,7 +28,7 @@ public class CarritoController {
     //agregar Perfume al carrito
     @PostMapping("/agregar/{id}")
     public String agregarPerfume(@PathVariable int id) {
-        PerfumeModel Perfume = Perfumeserv.getPerfumeId(id);
+        PerfumeModel Perfume = Perfumeserv.getPerfume(id);
         if (Perfume != null) {
             carrito.add(Perfume);
             return "Perfume se agrego al carrito: " + Perfume.getModelo();
