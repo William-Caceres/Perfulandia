@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "PerfulandiaApplication",
+            "request": "launch",
+            "mainClass": "proyecto.Perfulandia.PerfulandiaApplication",
+            "projectName": "Perfulandia"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BibliotecaduocV2Application<bibliotecaduocV2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.bibliotecaduocV2.BibliotecaduocV2Application",
+            "projectName": "bibliotecaduocV2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
