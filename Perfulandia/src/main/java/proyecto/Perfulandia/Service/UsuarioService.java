@@ -10,7 +10,7 @@ import proyecto.Perfulandia.Model.UsuarioModel;
 import proyecto.Perfulandia.Repository.UsuarioRepository;
 // codigo de usuarioSERVICE
 @Service
-public abstract class UsuarioService {
+public class UsuarioService {
     @Autowired
     private UsuarioRepository repo;
         

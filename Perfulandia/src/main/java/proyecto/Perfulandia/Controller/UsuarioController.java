@@ -18,6 +18,7 @@ import proyecto.Perfulandia.Service.UsuarioService;
 @RequestMapping("/api/v1/usuarios")
 @CrossOrigin
 public class UsuarioController {
+    
     @Autowired
     private UsuarioService serv;
 

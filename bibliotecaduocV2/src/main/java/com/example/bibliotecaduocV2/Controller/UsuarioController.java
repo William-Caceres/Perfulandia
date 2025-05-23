@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.bibliotecaduocV2.Model.Usuario;
 import com.example.bibliotecaduocV2.Service.UsuarioService;
 
-
 @RestController
 @RequestMapping("/api/v2/usuarios")
 @CrossOrigin
 public class UsuarioController {
+    
     @Autowired
     private UsuarioService serv;
 
