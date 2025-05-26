@@ -16,7 +16,6 @@ import proyecto.Perfulandia.Service.PerfumeService;
 
 
 
-
 @RestController
 @RequestMapping("/api/v2/carrito")
 public class CarritoController {
@@ -31,7 +30,7 @@ public class CarritoController {
         PerfumeModel Perfume = Perfumeserv.getPerfume(id);
         if (Perfume != null) {
             carrito.add(Perfume);
-            return "Perfume se agrego al carrito: " + Perfume.getModelo();
+            return "Perfume se agrego al carrito: " + Perfume.getNombre();
         }
         return "El Perfume no fue encontrado";
     }

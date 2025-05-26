@@ -9,14 +9,14 @@ const carrito = (() =>{
             tbody.innerHTML = "";
             totalItems.textContent = Perfume.length;
 
-            libros.forEach(Perfume => {
+            Perfume.forEach(Perfume => {
                 const fila = `
                     <tr>
-                        <td>${Perfume.id}</td>
-                        <td>${Perfume.modelo}</td>
-                        <td>${Perfume.marca}</td>
+                        <td> ${Perfume.id}</td>
+                        <td> ${Perfume.nombre}</td>
+                        <td> ${Perfume.ml}</td>
                         <td>
-                            <button onclick= "carrito.eliminarLibro(${Perfume.id})">ELIMINAR </button>
+                            <button onclick= "carrito.eliminarPerfume(${Perfume.id})">Quitar del carro </button>
                         </td>
                     </tr>
                 `;
@@ -42,7 +42,7 @@ const carrito = (() =>{
     async function eliminarPerfume(id) {
         try {
             await fetch(`${API}/eliminar/${id}`, {method: "DELETE"});
-            listarPerfume()
+            listarCarrito()
         } catch (err) {
             console.error("Error al eliminar del carrito")
         }
@@ -70,5 +70,5 @@ const carrito = (() =>{
             listarCarrito();
         }
     }
-    return{listarCarrito, agregarLibro, eliminarLibro, vaciarCarrito, confirmarCompra};
+    return{listarCarrito, agregarPerfume, eliminarPerfume, vaciarCarrito, confirmarCompra};
 }) ();

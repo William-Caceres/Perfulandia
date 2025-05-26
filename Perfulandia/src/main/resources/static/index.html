@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+<!--CABEZA del INDICE de la PAGINA-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfulandia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
+<!--CUERPO del INDICE de la PAGINA-->
 <body class="bg-light">
+    
+    <!--mensaje de BIENVENIDA al usuario-->
     <div class = "containter-fluid">
         <h1 id = "mensaje">
-            Bienvedio@
+            Bienvenido a la perfumeria, 
         </h1>
         <div></div>
         <button onclick = "cerrarSesion()" class = "btn btn-outline-danger mt-4">
@@ -17,6 +22,32 @@
         </button>
     </div>
 
+    <!--tarjetas de PERFUMES-->
+    <div class="row row-cols-1 row-cols-3 g-4" id = "catalogo-productos"></div>
+    <!--CARRITO de la pagina-->
+    <div >
+        <hr class = " my-5">
+        <h2>Carrito de compras</h2>
+        <button class = "btn btn-danger mb-2" onclick = "carrito.vaciarCarrito()"> Vaciar carrito </button>
+        <button class = "btn btn-success mb-2 ms-2" onclick = "carrito.confirmarCompra()"> Confrimar compra </button>
+        <div class ="table-responsive">
+            <table id = "tablaCarrito">
+                <thead>
+                    <tr>
+                        <th>| ID      </th>
+                        <th>| Nombre  </th>
+                        <th>| Ml      </th>
+                        <th>| Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <p><strong>Total de items: </strong><span id="totalCarrito"></span></p>
+    </div>
+    <!--ruta de las API-->
     <script src="js/app_ingresar.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/app_carrito.js"></script>
 </body>
 </html>

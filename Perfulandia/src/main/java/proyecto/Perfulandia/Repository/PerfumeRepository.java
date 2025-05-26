@@ -14,7 +14,11 @@ public class PerfumeRepository {
     private List<PerfumeModel> listaPerfumes = new ArrayList<>();
 
     public PerfumeRepository() {
-
+        // PERFUMES por defecto
+        listaPerfumes.add(new PerfumeModel(1,"Le fragance du France","Fragossia","Clasico","Francia",85));
+        listaPerfumes.add(new PerfumeModel(2,"Home escence","Gold escences","Clasico","USA",100));
+        listaPerfumes.add(new PerfumeModel(3,"Blue ocean","Mystic Docks","Deluxe","Italia",60));
+        listaPerfumes.add(new PerfumeModel(4,"Colisseu","Ol' Rome","Clasico","Roma",80));
     }
 
     public List<PerfumeModel> retornarPerfumes()
