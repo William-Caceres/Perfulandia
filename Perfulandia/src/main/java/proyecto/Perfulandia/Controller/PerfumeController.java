@@ -60,4 +60,5 @@ public class PerfumeController {
         return perfumeService.totalPerfumesV2();
     }
 
+
 }

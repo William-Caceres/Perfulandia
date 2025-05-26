@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 public class PerfumeModel {
     private int id;
-
+    private int precio;
     private String nombre;
     private String marca;
     private String modelo;
     private String paisOrigen;
     private int ml;
+    private int stock; 
     
 }

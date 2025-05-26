@@ -15,10 +15,10 @@ public class PerfumeRepository {
 
     public PerfumeRepository() {
         // PERFUMES por defecto
-        listaPerfumes.add(new PerfumeModel(1,"Le fragance du France","Fragossia","Clasico","Francia",85));
-        listaPerfumes.add(new PerfumeModel(2,"Home escence","Gold escences","Clasico","USA",100));
-        listaPerfumes.add(new PerfumeModel(3,"Blue ocean","Mystic Docks","Deluxe","Italia",60));
-        listaPerfumes.add(new PerfumeModel(4,"Colisseu","Ol' Rome","Clasico","Roma",80));
+        listaPerfumes.add(new PerfumeModel(1,30000,"Le fragance du France","Fragossia","Clasico","Francia",85,200));
+        listaPerfumes.add(new PerfumeModel(2,45000,"Home escence","Gold escences","Clasico","USA",100,350));
+        listaPerfumes.add(new PerfumeModel(3,120000,"Blue ocean","Mystic Docks","Deluxe","Italia",60,150));
+        listaPerfumes.add(new PerfumeModel(4,90000,"Colisseu","Ol' Rome","Clasico","Roma",80,200));
     }
 
     public List<PerfumeModel> retornarPerfumes()
