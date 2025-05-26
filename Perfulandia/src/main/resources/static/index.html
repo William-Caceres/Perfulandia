@@ -21,9 +21,28 @@
             Cerrar sesion
         </button>
     </div>
-
+    <!--agregar PERFUME, modificar PERFUME-->
+    <div class = "card mb-4">
+        <div class = "card-body">
+            <h4>Ingresar datos del nuevo Perfume</h4>
+            <div class = "row g-2">
+                <div class = "col"><input class = "from-control" type = "text" id = "nombre" placeholder= "Nombre fragancia"></div>
+                <div class = "col"><input class = "from-control" type = "text" id = "marca" placeholder= "Marca"></div>
+                <div class = "col"><input class = "from-control" type = "text" id = "modelo" placeholder= "Modelo"></div>
+            </div>
+            <div class = "row g-2 mt-2">
+                <div class = "col"><input class = "from-control" type = "text" id = "paisOrigen" placeholder= "Pais de origen"></div>
+                <div class = "col"><input class = "from-control" type = "text" id = "ml" placeholder= "Contenido (ml)"></div>
+                <div class="col d-grid"><button class="btn btn-success" id ="botonFormulario" onclick="agregarPerfume()">Agregar perfume</button></div>
+            </div>
+        </div>
+    </div>
     <!--tarjetas de PERFUMES-->
-    <div class="row row-cols-1 row-cols-3 g-4" id = "catalogo-productos"></div>
+    <div class="row row-cols-1 row-cols-3 g-4">
+        <div class = "col">
+            <div class = "card" id = "catalogo-productos"></div>
+        </div>
+    </div>
     <!--CARRITO de la pagina-->
     <div >
         <hr class = " my-5">
@@ -34,10 +53,10 @@
             <table id = "tablaCarrito">
                 <thead>
                     <tr>
-                        <th>| ID      </th>
-                        <th>| Nombre  </th>
-                        <th>| Ml      </th>
-                        <th>| Eliminar</th>
+                        <th>ID      </th>
+                        <th>Nombre  </th>
+                        <th>Ml      </th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody></tbody>

@@ -11,8 +11,6 @@ function listarPerfumes()
             perfume.forEach(perfume => {
                 const tarjeta =
                 `
-                    <div class = "col">
-                        <div class = "card">
                             <!--img src = "..." class = "card-img-top" alt = "..."-->
                             <div class = "card-body">
                                 <h5 class = "card-title">${perfume.nombre}</h5>
@@ -22,9 +20,9 @@ function listarPerfumes()
                                 <p class = "card-text"> Contenido: ${perfume.ml}ml </p>
                             </div>
                             <div class = "card-footer">
+                                <button class="btn btn-danger btn-sm" onclick="eliminarPerfume(${perfume.id})">Eliminar</button> 
+                                <button class="btn btn-warning btn-sm" onclick="buscarPorID(${perfume.id})">Editar</button> 
                                 <button class="btn btn-success btn-sm" onclick="carrito.agregarPerfume(${perfume.id})">Agregar al carro</button>
-                            </div>
-                    </div>
                 `;
                 catalogo.innerHTML += tarjeta;
             });
