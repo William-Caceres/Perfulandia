@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data //
 @AllArgsConstructor 
 @NoArgsConstructor 
-public class PerfumeModel {
+public class producto {
 
     private int id;
 
@@ -25,7 +25,7 @@ public class PerfumeModel {
     private int ml;
     private int stock; 
 
-    public static Optional<PerfumeModel> map(Object o) {
+    public static Optional<producto> map(Object o) {
         throw new UnsupportedOperationException("Uniplemented method 'map'");
     }
     

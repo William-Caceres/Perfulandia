@@ -11,40 +11,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import proyecto.Perfulandia.Model.PerfumeModel;
-import proyecto.Perfulandia.Service.PerfumeService;
+import proyecto.Perfulandia.Model.producto;
+import proyecto.Perfulandia.Service.productoService;
 
 
 
 @RestController
 @RequestMapping("/api/v2/carrito")
 public class CarritoController {
-    private final List<PerfumeModel> carrito = new ArrayList<>();
+    private final List<producto> carrito = new ArrayList<>();
 
     @Autowired
-    private PerfumeService Perfumeserv;
+    private productoService Productoserv;
 
-    //agregar Perfume al carrito
+    //agregar Producto al carrito
     @PostMapping("/agregar/{id}")
-    public String agregarPerfume(@PathVariable int id) {
-        PerfumeModel Perfume = Perfumeserv.getPerfume(id);
-        if (Perfume != null) {
-            carrito.add(Perfume);
-            return "Perfume se agrego al carrito: " + Perfume.getNombre();
+    public String agregarProducto(@PathVariable int id) {
+        producto Producto = Productoserv.getProducto(id);
+        if (Producto != null) {
+            carrito.add(Producto);
+            return "Producto se agrego al carrito: " + Producto.getNombre();
         }
-        return "El Perfume no fue encontrado";
+        return "El Producto no fue encontrado";
     }
     
-    //Metodo para eliminar Perfume del carrito
+    //Metodo para eliminar Producto del carrito
     @DeleteMapping("/eliminar/{id}") 
-    public String eliminarPerfume(@PathVariable int id) {
-        boolean eliminado = carrito.removeIf(Perfume -> Perfume.getId() == id);
-        return eliminado ? "Perfume ha sido eliminado" : "Perfume no encontrado";
+    public String eliminarProducto(@PathVariable int id) {
+        boolean eliminado = carrito.removeIf(producto -> producto.getId() == id);
+        return eliminado ? "Producto ha sido eliminado" : "Producto no encontrado";
     }
     
     //Metodo para ver el carrito
     @GetMapping
-    public List<PerfumeModel> verCarrito() {
+    public List<producto> verCarrito() {
         return carrito;
     }
 

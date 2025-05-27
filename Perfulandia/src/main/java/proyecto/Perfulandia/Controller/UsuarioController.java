@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import proyecto.Perfulandia.Model.UsuarioModel;
+import proyecto.Perfulandia.Model.usuario;
 import proyecto.Perfulandia.Service.UsuarioService;
 
 @RestController
@@ -23,13 +23,13 @@ public class UsuarioController {
     private UsuarioService serv;
 
     @PostMapping("/registrar")
-        public UsuarioModel registrar(@RequestBody UsuarioModel u) {
+        public usuario registrar(@RequestBody usuario u) {
             return serv.registrar(u);
         }
 
     @PostMapping("/login")
-        public Map<String, String> login(@RequestBody UsuarioModel u) {
-            Optional<UsuarioModel> user = serv.autenticar(u.getEmail(), u.getPassword());
+        public Map<String, String> login(@RequestBody usuario u) {
+            Optional<usuario> user = serv.autenticar(u.getEmail(), u.getPassword());
             Map<String, String > respuesta = new HashMap<>();
 
             if (user.isPresent()) {

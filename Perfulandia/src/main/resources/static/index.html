@@ -14,17 +14,17 @@
     <!--mensaje de BIENVENIDA al usuario-->
     <div class = "containter-fluid">
         <h1 id = "mensaje">
-            Bienvenido a la perfumeria, 
+            Bienvenido a la Productoria, 
         </h1>
         <div></div>
         <button onclick = "cerrarSesion()" class = "btn btn-outline-danger mt-4">
             Cerrar sesion
         </button>
     </div>
-    <!--agregar PERFUME, modificar PERFUME-->
+    <!--agregar Producto, modificar Producto-->
     <div class = "card mb-4">
         <div class = "card-body">
-            <h4>Ingresar datos del nuevo Perfume</h4>
+            <h4>Ingresar datos del nuevo Producto</h4>
             <div class = "row g-2">
                 <div class = "col"><input class = "from-control" type = "text" id = "nombre" placeholder= "Nombre fragancia"></div>
                 <div class = "col"><input class = "from-control" type = "text" id = "marca" placeholder= "Marca"></div>
@@ -33,13 +33,13 @@
             </div>
             <div class = "row g-2 mt-2">
                 <div class = "col"><input class = "from-control" type = "text" id = "ml" placeholder= "Contenido (ml)"></div>
-                <div class = "col"><input class = "from-control" type = "text" id = "precio" placeholder= "Precio del perfume"></div>
+                <div class = "col"><input class = "from-control" type = "text" id = "precio" placeholder= "Precio del Producto"></div>
                 <div class = "col"><input class = "from-control" type = "text" id = "stock" placeholder= "Stock disponible"></div>
-                <div class="col d-grid"><button class="btn btn-success" id ="botonFormulario" onclick="agregarPerfume()">Agregar perfume</button></div>
+                <div class="col d-grid"><button class="btn btn-success" id ="botonFormulario" onclick="agregarProducto()">Agregar Producto</button></div>
             </div>
         </div>
     </div>
-    <!--tarjetas de PERFUMES-->
+    <!--tarjetas de ProductoS-->
     <div class="row row-cols-1 row-cols-3 g-4" id="catalogo-productos"></div>
     <!--CARRITO de la pagina-->
     <div >

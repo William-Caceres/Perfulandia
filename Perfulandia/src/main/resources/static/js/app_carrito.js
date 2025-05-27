@@ -3,21 +3,21 @@ const carrito = (() =>{
     async function listarCarrito() {
         try {
             const response = await fetch(API);
-            const Perfume = await response.json();
+            const Producto = await response.json();
             const tbody = document.querySelector("#tablaCarrito tbody");
             const totalItems = document.getElementById("totalCarrito");
             tbody.innerHTML = "";
-            totalItems.textContent = Perfume.length;
+            totalItems.textContent = Producto.length;
 
-            Perfume.forEach(Perfume => {
+            Producto.forEach(Producto => {
                 const fila = `
                     <tr>
-                        <td> $${Perfume.precio}</td>
-                        <td> ${Perfume.nombre}</td>
-                        <td> ${Perfume.marca}</td>
-                        <td> ${Perfume.paisOrigen}</td>
+                        <td> $${Producto.precio}</td>
+                        <td> ${Producto.nombre}</td>
+                        <td> ${Producto.marca}</td>
+                        <td> ${Producto.paisOrigen}</td>
                         <td>
-                            <button onclick= "carrito.eliminarPerfume(${Perfume.id})">Quitar del carro </button>
+                            <button onclick= "carrito.eliminarProducto(${Producto.id})">Quitar del carro </button>
                         </td>
                     </tr>
                 `;
@@ -27,20 +27,20 @@ const carrito = (() =>{
             console.error("Error al cargar el carrito", err);
         }
     }
-    //Funcion para agregar un Perfume al carrito
-    async function agregarPerfume(id) {
+    //Funcion para agregar un Producto al carrito
+    async function agregarProducto(id) {
         try{
             await fetch(`${API}/agregar/${id}`,
                  {method: "POST"});
-            alert("El Perfume ha sido agregado");
+            alert("El Producto ha sido agregado");
             listarCarrito();
         } catch (err) { 
-            console.error("Error al agregar el Perfume al carrito", err);
+            console.error("Error al agregar el Producto al carrito", err);
         }
     }
 
     //Metodo para eliminar un libro del carrito
-    async function eliminarPerfume(id) {
+    async function eliminarProducto(id) {
         try {
             await fetch(`${API}/eliminar/${id}`, {method: "DELETE"});
             listarCarrito()
@@ -71,5 +71,5 @@ const carrito = (() =>{
             listarCarrito();
         }
     }
-    return{listarCarrito, agregarPerfume, eliminarPerfume, vaciarCarrito, confirmarCompra};
+    return{listarCarrito, agregarProducto, eliminarProducto, vaciarCarrito, confirmarCompra};
 }) ();

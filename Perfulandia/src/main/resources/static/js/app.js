@@ -1,31 +1,31 @@
 //URL que permite que la API funcione
-const API_URL = "http://localhost:8080/api/v2/perfumes";
+const API_URL = "http://localhost:8080/api/v2/Productos";
 
-//-funcion para listar PERFUMES y ordenarlos en tarjetas (Catalogo)
-function listarPerfumes() {
+//-funcion para listar ProductoS y ordenarlos en tarjetas (Catalogo)
+function listarProductos() {
     fetch(API_URL)
         .then(response => response.json())
-        .then(perfumes => {
+        .then(Productos => {
             const catalogo = document.getElementById("catalogo-productos");
             catalogo.innerHTML = ""; // LIMPIA contenido anterior
 
-            perfumes.forEach(perfume => {
+            Productos.forEach(Producto => {
                 const tarjeta = `
                     <div class="col">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">${perfume.nombre}</h5>
-                                <p class="card-text">-${perfume.marca}-</p>
-                                <p class="card-text">Modelo ${perfume.modelo}</p>
-                                <p class="card-text">Hecho en ${perfume.paisOrigen}</p>
-                                <p class="card-text">contenido: ${perfume.ml}ml</p>
-                                <p class="card-text">Stock disponible: ${perfume.stock}</p>
-                                <h5 class="card-text">$${perfume.precio}</h5>
+                                <h5 class="card-title">${Producto.nombre}</h5>
+                                <p class="card-text">-${Producto.marca}-</p>
+                                <p class="card-text">Modelo ${Producto.modelo}</p>
+                                <p class="card-text">Hecho en ${Producto.paisOrigen}</p>
+                                <p class="card-text">contenido: ${Producto.ml}ml</p>
+                                <p class="card-text">Stock disponible: ${Producto.stock}</p>
+                                <h5 class="card-text">$${Producto.precio}</h5>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-success btn-sm" onclick="carrito.agregarPerfume(${perfume.id})">Agregar al carro</button>
-                                <button class="btn btn-success btn-sm" onclick="eliminarPerfume(${perfume.id})">Eliminar</button>
-                                <button class="btn btn-success btn-sm" onclick="buscarPorID(${perfume.id})">Modificar</button>
+                                <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${Producto.id})">Agregar al carro</button>
+                                <button class="btn btn-success btn-sm" onclick="eliminarProducto(${Producto.id})">Eliminar</button>
+                                <button class="btn btn-success btn-sm" onclick="buscarPorID(${Producto.id})">Modificar</button>
                             </div>
                         </div>
                     </div>`;
@@ -34,11 +34,11 @@ function listarPerfumes() {
         });
 }
 
-//-variable para almacenar la lista de PERFUMES  
-let perfume = [];
+//-variable para almacenar la lista de ProductoS  
+let Producto = [];
 
-//-funcion para agregar un PERFUME
-function agregarPerfume() {
+//-funcion para agregar un Producto
+function agregarProducto() {
     const precio = document.getElementById("precio").value;
     const nombre = document.getElementById("nombre").value;
     const marca = document.getElementById("marca").value;
@@ -47,7 +47,7 @@ function agregarPerfume() {
     const ml = parseInt(document.getElementById("ml").value);
     const stock = parseInt(document.getElementById("stock").value);
 
-    const nuevoPerfume = 
+    const nuevoProducto = 
     {
         precio,
         nombre,
@@ -58,61 +58,61 @@ function agregarPerfume() {
         stock
     };
 
-    fetch(API_URL, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(nuevoPerfume) })
+    fetch(API_URL, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(nuevoProducto) })
         .then(response => {
-            if (!response.ok) throw new Error("Error al guardar perfume");
+            if (!response.ok) throw new Error("Error al guardar Producto");
             return response.json();
         })
         .then(data => {
-            alert("Perfume agregado exitosamente");
-            listarPerfumes();
-            limpiarFormularioPerfumes();
+            alert("Producto agregado exitosamente");
+            listarProductos();
+            limpiarFormularioProductos();
         })
         .catch(error => {
             console.error("Error:", error);
-            alert("Ocurrió un error al guardar el perfume.");
+            alert("Ocurrió un error al guardar el Producto.");
         });
 }
 
-//-funcion para ELIMINAR un PERFUME
-function eliminarPerfume(id) {
+//-funcion para ELIMINAR un Producto
+function eliminarProducto(id) {
     fetch(`${API_URL}/${id}`, {method: "DELETE"}).then(response => {
         if (response.ok) {
-            alert("Se ha eliminado el perfume exitosamente");
-            listarPerfumes();
+            alert("Se ha eliminado el Producto exitosamente");
+            listarProductos();
         }
     });
 }
 
-//-variable para almacenar la ID del PERFUME que se este MODIFICANDO
-let perfumeEnModificacion = null; 
-//-funcion para buscar un PERFUME por su ID
+//-variable para almacenar la ID del Producto que se este MODIFICANDO
+let ProductoEnModificacion = null; 
+//-funcion para buscar un Producto por su ID
 function buscarPorID(id) {
     fetch(`${API_URL}/${id}`)
         .then(response => response.json())
-        .then(perfume => {
-            document.getElementById("precio").value = perfume.precio;
-            document.getElementById("nombre").value = perfume.nombre;
-            document.getElementById("marca").value = perfume.modelo;
-            document.getElementById("modelo").value = perfume.marca;
-            document.getElementById("paisOrigen").value = perfume.marca;
-            document.getElementById("ml").value = perfume.ml;
-            document.getElementById("stock").value = perfume.stock;
+        .then(Producto => {
+            document.getElementById("precio").value = Producto.precio;
+            document.getElementById("nombre").value = Producto.nombre;
+            document.getElementById("marca").value = Producto.modelo;
+            document.getElementById("modelo").value = Producto.marca;
+            document.getElementById("paisOrigen").value = Producto.marca;
+            document.getElementById("ml").value = Producto.ml;
+            document.getElementById("stock").value = Producto.stock;
 
-            perfumeEnModificacion = perfume.id;
+            ProductoEnModificacion = Producto.id;
 
             const boton = document.getElementById("botonFormulario");
             if (boton) {
-                boton.textContent = "Actualizar perfume";
+                boton.textContent = "Actualizar Producto";
                 boton.onclick = function() {
-                    actualizarPerfume(perfumeEnModificacion);
+                    actualizarProducto(ProductoEnModificacion);
                 };
             }
         });
 }
 
-//-funcion para ACTUALIZAR los datos de un PERFUME---------------------------------------------------
-function actualizarPerfume(id) {
+//-funcion para ACTUALIZAR los datos de un Producto---------------------------------------------------
+function actualizarProducto(id) {
     const precioMod = document.getElementById("precio").value;
     const nombreMod = document.getElementById("nombre").value;
     const marcaMod = document.getElementById("marca").value;
@@ -121,7 +121,7 @@ function actualizarPerfume(id) {
     const mlMod = document.getElementById("ml").value;
     const stockMod = document.getElementById("stock").value;
 
-    const perfumeActualizacion = {
+    const ProductoActualizacion = {
         id: id,
         precio: precioMod,
         nombre: nombreMod,
@@ -135,18 +135,18 @@ function actualizarPerfume(id) {
     fetch(`${API_URL}/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(perfumeActualizacion)
+        body: JSON.stringify(ProductoActualizacion)
     })
     .then(response => response.json())
     .then(data => {
-        alert("Perfume actualizado exitosamente");
-        listarPerfumes();
-        limpiarFormularioPerfumes();
+        alert("Producto actualizado exitosamente");
+        listarProductos();
+        limpiarFormularioProductos();
     });
 }
 
-//-funcion para limpiar el formulario de AGREGAR/ACTUALIZAR un PERFUME
-function limpiarFormularioPerfumes() {
+//-funcion para limpiar el formulario de AGREGAR/ACTUALIZAR un Producto
+function limpiarFormularioProductos() {
     document.getElementById("precio").value = "";
     document.getElementById("nombre").value = "";
     document.getElementById("marca").value = "";
@@ -156,10 +156,10 @@ function limpiarFormularioPerfumes() {
     document.getElementById("stock").value = "";
 
     const boton = document.getElementById("botonFormulario");
-    boton.innerText = "Agregar perfume";
-    boton.setAttribute("onclick", "agregarPerfume()");
+    boton.innerText = "Agregar Producto";
+    boton.setAttribute("onclick", "agregarProducto()");
 
-    perfumeEnModificacion = null;
+    ProductoEnModificacion = null;
 }
 
-listarPerfumes()
+listarProductos()
