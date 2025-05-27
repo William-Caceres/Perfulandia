@@ -1,31 +1,29 @@
 //URL que permite que la API funcione
-const API_URL = "http://localhost:8080/api/v2/Productos";
+const API_URL = "http://localhost:8080/api/v2/productos";
 
 //-funcion para listar ProductoS y ordenarlos en tarjetas (Catalogo)
 function listarProductos() {
     fetch(API_URL)
         .then(response => response.json())
-        .then(Productos => {
+        .then(productos => {
             const catalogo = document.getElementById("catalogo-productos");
             catalogo.innerHTML = ""; // LIMPIA contenido anterior
 
-            Productos.forEach(Producto => {
+            productos.forEach(producto => {
                 const tarjeta = `
                     <div class="col">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">${Producto.nombre}</h5>
-                                <p class="card-text">-${Producto.marca}-</p>
-                                <p class="card-text">Modelo ${Producto.modelo}</p>
-                                <p class="card-text">Hecho en ${Producto.paisOrigen}</p>
-                                <p class="card-text">contenido: ${Producto.ml}ml</p>
-                                <p class="card-text">Stock disponible: ${Producto.stock}</p>
-                                <h5 class="card-text">$${Producto.precio}</h5>
+                                <h5 class="card-title">${producto.nombre}</h5>
+                                <p class="card-text">-${producto.marca}-</p>
+                                <p class="card-text">Modelo ${producto.modelo}</p>
+                                <p class="card-text">Hecho en ${producto.paisOrigen}</p>
+                                <p class="card-text">contenido: ${producto.ml}ml</p>
+                                <p class="card-text">Stock disponible: ${producto.stock}</p>
+                                <h5 class="card-text">$${producto.precio}</h5>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${Producto.id})">Agregar al carro</button>
-                                <button class="btn btn-success btn-sm" onclick="eliminarProducto(${Producto.id})">Eliminar</button>
-                                <button class="btn btn-success btn-sm" onclick="buscarPorID(${Producto.id})">Modificar</button>
+                                <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id})">Agregar al carro</button>
                             </div>
                         </div>
                     </div>`;
@@ -85,27 +83,27 @@ function eliminarProducto(id) {
 }
 
 //-variable para almacenar la ID del Producto que se este MODIFICANDO
-let ProductoEnModificacion = null; 
+let productoEnModificacion = null; 
 //-funcion para buscar un Producto por su ID
 function buscarPorID(id) {
     fetch(`${API_URL}/${id}`)
         .then(response => response.json())
-        .then(Producto => {
-            document.getElementById("precio").value = Producto.precio;
-            document.getElementById("nombre").value = Producto.nombre;
-            document.getElementById("marca").value = Producto.modelo;
-            document.getElementById("modelo").value = Producto.marca;
-            document.getElementById("paisOrigen").value = Producto.marca;
-            document.getElementById("ml").value = Producto.ml;
-            document.getElementById("stock").value = Producto.stock;
+        .then(producto => {
+            document.getElementById("precio").value = producto.precio;
+            document.getElementById("nombre").value = producto.nombre;
+            document.getElementById("marca").value = producto.modelo;
+            document.getElementById("modelo").value = producto.marca;
+            document.getElementById("paisOrigen").value = producto.marca;
+            document.getElementById("ml").value = producto.ml;
+            document.getElementById("stock").value = producto.stock;
 
-            ProductoEnModificacion = Producto.id;
+            productoEnModificacion = producto.id;
 
             const boton = document.getElementById("botonFormulario");
             if (boton) {
                 boton.textContent = "Actualizar Producto";
                 boton.onclick = function() {
-                    actualizarProducto(ProductoEnModificacion);
+                    actualizarProducto(producto.id);
                 };
             }
         });
@@ -121,7 +119,7 @@ function actualizarProducto(id) {
     const mlMod = document.getElementById("ml").value;
     const stockMod = document.getElementById("stock").value;
 
-    const ProductoActualizacion = {
+    const productoActualizacion = {
         id: id,
         precio: precioMod,
         nombre: nombreMod,
@@ -135,7 +133,7 @@ function actualizarProducto(id) {
     fetch(`${API_URL}/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},
-        body: JSON.stringify(ProductoActualizacion)
+        body: JSON.stringify(productoActualizacion)
     })
     .then(response => response.json())
     .then(data => {
@@ -159,7 +157,7 @@ function limpiarFormularioProductos() {
     boton.innerText = "Agregar Producto";
     boton.setAttribute("onclick", "agregarProducto()");
 
-    ProductoEnModificacion = null;
+    productoEnModificacion = null;
 }
 
 listarProductos()
