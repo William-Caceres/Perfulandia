@@ -12,9 +12,10 @@ const carrito = (() =>{
             Perfume.forEach(Perfume => {
                 const fila = `
                     <tr>
-                        <td> ${Perfume.id}</td>
+                        <td> $${Perfume.precio}</td>
                         <td> ${Perfume.nombre}</td>
-                        <td> ${Perfume.ml}</td>
+                        <td> ${Perfume.marca}</td>
+                        <td> ${Perfume.paisOrigen}</td>
                         <td>
                             <button onclick= "carrito.eliminarPerfume(${Perfume.id})">Quitar del carro </button>
                         </td>

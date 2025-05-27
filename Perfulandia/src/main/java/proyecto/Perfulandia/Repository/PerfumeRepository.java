@@ -59,11 +59,13 @@ public class PerfumeRepository {
         // Crear una nueva instancia con los datos del perfume recibido
         PerfumeModel p = new PerfumeModel();
         p.setId ((int) newId);
+        p.setPrecio(perfumeNuevo.getPrecio());
         p.setNombre(perfumeNuevo.getNombre());
         p.setMarca(perfumeNuevo.getMarca());
         p.setModelo(perfumeNuevo.getModelo());
         p.setPaisOrigen(perfumeNuevo.getPaisOrigen());
         p.setMl(perfumeNuevo.getMl());
+        p.setStock(perfumeNuevo.getStock());
 
         listaPerfumes.add(p);
         return p;
@@ -82,11 +84,13 @@ public class PerfumeRepository {
         }
         PerfumeModel p = new PerfumeModel();
         p.setId (id);
+        p.setPrecio(perfume.getPrecio());
         p.setNombre(perfume.getNombre());
         p.setMarca(perfume.getMarca());
         p.setModelo(perfume.getModelo());
         p.setPaisOrigen(perfume.getPaisOrigen());
         p.setMl(perfume.getMl());
+        p.setStock(perfume.getStock());
 
         listaPerfumes.set(id, perfume);
         return p;
