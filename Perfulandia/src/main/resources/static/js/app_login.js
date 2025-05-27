@@ -16,7 +16,7 @@ function login(){
             sessionStorage.setItem("nombreUsuario", data.nombre);
             window.location.href = "/index.html";
         } else {
-            alert("El acceso ha sido denegado");
+            alert("Credenciales incorrectas, verifique sus datos");
         }
     });
 }
