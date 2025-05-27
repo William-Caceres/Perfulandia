@@ -54,6 +54,7 @@ public class productoRepository {
             if (producto.getId() >= newId) {
                 newId = producto.getId() + 1;
             }
+            
         }
 
         // Crear una nueva instancia con los datos del producto recibido
