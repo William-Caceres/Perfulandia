@@ -2,28 +2,31 @@
 const API_URL = "http://localhost:8080/api/v2/perfumes";
 
 //-funcion para listar PERFUMES y ordenarlos en tarjetas (Catalogo)
-function listarPerfumes()
-{
+function listarPerfumes() {
     fetch(API_URL)
         .then(response => response.json())
-        .then(perfume => {
-            const catalogo = document.getElementById("catalogo-productos")
-            perfume.forEach(perfume => {
-                const tarjeta =
-                `
-                            <!--img src = "..." class = "card-img-top" alt = "..."-->
-                            <div class = "card-body">
-                                <h5 class = "card-title">${perfume.nombre}</h5>
-                                <p class = "card-text"> Marca: ${perfume.marca} </p>
-                                <p class = "card-text"> Modelo: ${perfume.modelo} </p>
-                                <p class = "card-text"> Pais de origen: ${perfume.paisOrigen} </p>
-                                <p class = "card-text"> Contenido: ${perfume.ml}ml </p>
+        .then(perfumes => {
+            const catalogo = document.getElementById("catalogo-productos");
+            catalogo.innerHTML = ""; // LIMPIA contenido anterior
+
+            perfumes.forEach(perfume => {
+                const tarjeta = `
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">${perfume.nombre}</h5>
+                                <p class="card-text">Marca: ${perfume.marca}</p>
+                                <p class="card-text">Modelo: ${perfume.modelo}</p>
+                                <p class="card-text">País de origen: ${perfume.paisOrigen}</p>
+                                <p class="card-text">Contenido: ${perfume.ml}ml</p>
                             </div>
-                            <div class = "card-footer">
-                                <button class="btn btn-danger btn-sm" onclick="eliminarPerfume(${perfume.id})">Eliminar</button> 
-                                <button class="btn btn-warning btn-sm" onclick="buscarPorID(${perfume.id})">Editar</button> 
+                            <div class="card-footer">
                                 <button class="btn btn-success btn-sm" onclick="carrito.agregarPerfume(${perfume.id})">Agregar al carro</button>
-                `;
+                                <button class="btn btn-success btn-sm" onclick="eliminarPerfume(${perfume.id})">Eliminar</button>
+                                <button class="btn btn-success btn-sm" onclick="buscarPorID(${perfume.id})">Modificar</button>
+                            </div>
+                        </div>
+                    </div>`;
                 catalogo.innerHTML += tarjeta;
             });
         });
@@ -37,27 +40,32 @@ function agregarPerfume() {
     const nombre = document.getElementById("nombre").value;
     const marca = document.getElementById("marca").value;
     const modelo = document.getElementById("modelo").value;
-    const ml = document.getElementById("ml").value;
+    const pOrigen = document.getElementById("paisOrigen").value;
+    const ml = parseFloat(document.getElementById("ml").value);
 
     const nuevoPerfume = 
     {
         nombre,
         marca,
         modelo,
+        pOrigen,
         ml
     };
 
-    fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json"},
-        body:  JSON.stringify(nuevoPerfume)
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert("Perfume agregado exitosamente a la base de datos");
-        listarPerfumes();
-        limpiarFormularioPerfumes();
-    });
+    fetch(API_URL, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(nuevoPerfume) })
+        .then(response => {
+            if (!response.ok) throw new Error("Error al guardar perfume");
+            return response.json();
+        })
+        .then(data => {
+            alert("Perfume agregado exitosamente");
+            listarPerfumes();
+            limpiarFormularioPerfumes();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Ocurrió un error al guardar el perfume.");
+        });
 }
 
 //-funcion para ELIMINAR un PERFUME
@@ -99,6 +107,7 @@ function actualizarPerfume(id) {
     const nombreMod = document.getElementById("nombre").value;
     const marcaMod = document.getElementById("marca").value;
     const modeloMod = document.getElementById("modelo").value;
+    const pOrigenMod = document.getElementById("paisOrigen").value;
     const mlMod = document.getElementById("ml").value;
 
     const perfumeActualizacion = {
@@ -106,6 +115,7 @@ function actualizarPerfume(id) {
         nombre: nombreMod,
         marca: marcaMod,
         modelo: modeloMod,
+        pOrigen: pOrigenMod,
         ml: mlMod
     };
 
