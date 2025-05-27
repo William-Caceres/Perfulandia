@@ -3,8 +3,11 @@ package proyecto.Perfulandia.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import proyecto.Perfulandia.Model.Incidencia;
 
+@Repository
 public class IncidenciaRepository {
     
      private List<Incidencia> listaIncidencias = new ArrayList<>();
