@@ -24,31 +24,31 @@ public class productoController {
     @Autowired
     private productoService productoService;
 
-    @GetMapping
+    @GetMapping("/listar")
     // Listar productos
     public List<producto> listarProductos(){
         return productoService.getProductoModels();
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     // Agregar un producto
     public producto agregarProducto(@RequestBody producto producto){
         return productoService.saveProducto(producto);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/buscar/{id}")
     // Buscar por id
         public producto buscarProducto(@PathVariable int id){
             return productoService.getProducto(id);
         }
 
-    @PutMapping("{id}")
+    @PutMapping("/actualizar/{id}")
     // Se busca por ID y se actualiza un producto
     public producto actualizarProducto(@PathVariable int id, @RequestBody producto perf){
         return productoService.updateProducto(perf);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/eliminar/{id}")
     // Borrar producto por ID
     public String eliminarProducto(@PathVariable int id){
         return productoService.deleteProducto(id);

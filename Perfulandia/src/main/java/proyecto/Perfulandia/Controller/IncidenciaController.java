@@ -21,15 +21,14 @@ public class IncidenciaController {
     private IncidenciaService inciServ;
     
     //LISTAR
-    @GetMapping
+    @GetMapping("/listar")
     public List<Incidencia> listarIncidencias() {
         return inciServ.getIncidencias();
     }
     
     //GUARDAR
-    @PostMapping
+    @PostMapping("/crear")
     public Incidencia agregarIncidencia(@RequestBody Incidencia incidencia){
         return inciServ.saveIncidencia(incidencia);
     }
-    
 }

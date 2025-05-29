@@ -29,7 +29,8 @@ public class NotificacionController {
     }
     // agregar endpoint para notificaciones
     @PostMapping("/crear")
-    public Notificación crearNotificación(@RequestBody Notificación notificación) {return notificaciónService.crearNotificacion(notificación);
+    public Notificación crearNotificación(@RequestBody Notificación notificación) {
+        return notificaciónService.crearNotificacion(notificación);
     }
 
     // Método para obtener todas las notificaciones del destinatario conectado:

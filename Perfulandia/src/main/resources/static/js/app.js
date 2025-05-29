@@ -3,7 +3,7 @@ const API_URL = "http://localhost:8080/api/v2/productos";
 
 //-funcion para listar ProductoS y ordenarlos en tarjetas (Catalogo)
 function listarProductos() {
-    fetch(API_URL)
+    fetch(`${API_URL}/listar`)
         .then(response => response.json())
         .then(productos => {
             const catalogo = document.getElementById("catalogo-productos");
@@ -56,25 +56,28 @@ function agregarProducto() {
         stock
     };
 
-    fetch(API_URL, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(nuevoProducto) })
-        .then(response => {
-            if (!response.ok) throw new Error("Error al guardar Producto");
-            return response.json();
-        })
-        .then(data => {
-            alert("Producto agregado exitosamente");
-            listarProductos();
-            limpiarFormularioProductos();
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("Ocurrió un error al guardar el Producto.");
-        });
+    fetch(`${API_URL}/crear`, {
+        method: "POST", 
+        headers: {"Content-Type": "application/json"}, 
+        body: JSON.stringify(nuevoProducto) })
+            .then(response => {
+                if (!response.ok) throw new Error("Error al guardar Producto");
+                return response.json();
+            })
+            .then(data => {
+                alert("Producto agregado exitosamente");
+                listarProductos();
+                limpiarFormularioProductos();
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Ocurrió un error al guardar el Producto.");
+            });
 }
 
 //-funcion para ELIMINAR un Producto
 function eliminarProducto(id) {
-    fetch(`${API_URL}/${id}`, {method: "DELETE"}).then(response => {
+    fetch(`${API_URL}/eliminar/${id}`, {method: "DELETE"}).then(response => {
         if (response.ok) {
             alert("Se ha eliminado el Producto exitosamente");
             listarProductos();
@@ -86,7 +89,7 @@ function eliminarProducto(id) {
 let productoEnModificacion = null; 
 //-funcion para buscar un Producto por su ID
 function buscarPorID(id) {
-    fetch(`${API_URL}/${id}`)
+    fetch(`${API_URL}/buscar/${id}`)
         .then(response => response.json())
         .then(producto => {
             document.getElementById("precio").value = producto.precio;
@@ -130,7 +133,7 @@ function actualizarProducto(id) {
         stock: stockMod
     };
 
-    fetch(`${API_URL}/${id}`, {
+    fetch(`${API_URL}/actualizar/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify(productoActualizacion)

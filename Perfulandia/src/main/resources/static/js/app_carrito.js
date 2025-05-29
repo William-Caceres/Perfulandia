@@ -82,9 +82,7 @@ const carrito = (() =>{
             });
             //refrescamos al obtener notificaciones para que le salgan de inmediato al usuario al confirmar la compra
             obtener_notificaciones();
-
         }
-
             alert("Compra realizada exitosamente");
             listarCarrito();
         }
