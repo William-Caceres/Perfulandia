@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/v2/notificaciones";
+const API_NOT = "http://localhost:8080/api/v2/notificaciones";
 
 
 //Función para obtener las notificaciones del usuario.
@@ -52,6 +52,6 @@ async function obtener_notificaciones() {
 }
 
 // Esta funcion la utilizamos para redirigir al aparatado de notificaciones
-function reedirigir_a_notificaciones() {
-    window.location.href = "/notificaciones.html";
+function redirigir_a_notificaciones() {
+    window.location.href = "notificaciones.html";
 }

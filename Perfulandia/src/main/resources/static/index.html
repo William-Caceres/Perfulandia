@@ -17,26 +17,32 @@
     <!--Intento Notificacion-->
 
     <header>
-        <div style="background-color: rgb(223, 222, 236); width: 100%; align-items: center; display: flex; justify-content: space-between;">
-            <div style="justify-content: left; margin-left: 10px;">
+        <div style="background-color: rgb(223, 222, 236); width: 100%; 
+                    align-items: center; display: flex; justify-content: 
+                    space-between; ">
+            <div style = "margin-left: 10.5px;">
+                <h3 id = "mensaje">
+                    Hola usuario, no tienes cuenta?: 
+                </h3>
+            </div>
+            <div style = "margin-bottom: 15px; margin-top: -10px;">
+                <button onclick = "cerrarSesion()" class = "btn btn-outline-danger mt-4">
+                    Cerrar sesion
+                </button>
+            </div>
+            <div style = "margin-left: 10.5px;">
+                <p>asd</p>
             </div>
             <div style="justify-items: right; margin-right: 10px;">
-                <button onclick="reedirigir_a_notificaciones()" style="border: 0px; border-radius: 0px;"><h1>Notificaciones</h1></button>
+                <button onclick="redirigir_a_notificaciones()" style="border: 0px; border-radius: 3px;">
+                    <h5>Notificaciones</h5>
+                </button>
             </div>
         </div>
     </header>
 
 
     <!--mensaje de BIENVENIDA al usuario-->
-    <div class = "containter-fluid">
-        <h1 id = "mensaje">
-            Bienvenido a la Productoria
-        </h1>
-        <div></div>
-        <button onclick = "cerrarSesion()" class = "btn btn-outline-danger mt-4">
-            Cerrar sesion
-        </button>
-    </div>
     <!--
     <div class = "card mb-4">
         <div class = "card-body">
@@ -57,8 +63,19 @@
     </div>
     -->
     <!--tarjetas de ProductoS-->
-    <div class="row row-cols-1 row-cols-3 g-4" id="catalogo-productos"></div>
+    <div style="margin-left: 10px; margin-top: 1px; margin-right: 10px;" class="row row-cols-1 row-cols-3 g-4" id="catalogo-productos"></div>
     <!--CARRITO de la pagina-->
+    <div style="margin-left: 22px;">
+        <card>
+            <h1 style="color: white;">---</h1>
+            <h3>Queremos saber tu opinion!</h3>
+            <p class="text">Si tienes alguna opinion, sugerencia, o ciritica<</p>
+            <p class="text">sobre nuestra pagina pulsa este boton, e ingresa</p>
+            <p class="text">tu opinion en nuestro formulario!</p>
+            <a href="reclamo.html"><button class="btn btn-success">Dar mi opinion</button></a>
+            
+        </card>
+    </div>
     <div >
         <hr class = " my-5">
         <h2>Carrito de compras</h2>
@@ -82,8 +99,7 @@
 
     <!--Reporte de incidencias-->
 
-    <h3>Tienes algun reclamo?</h3>
-    <a href="reclamo.html"><button>Haz clic aqui</button></a>
+    
 
 
     <!--ruta de las API-->
