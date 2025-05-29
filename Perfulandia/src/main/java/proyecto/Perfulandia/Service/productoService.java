@@ -28,7 +28,7 @@ public class productoService {
         return productoRepository.buscarPorID(id);
     }
 
-    // ACTUALIZAR LIBRO
+    // ACTUALIZAR Producto
     public producto updateProducto(producto prod){
         return productoRepository.actualizarProducto(prod);
     }

@@ -69,6 +69,7 @@ const carrito = (() =>{
             await fetch(`${API}/vaciar`, {method: "DELETE"})
             alert("Compra realizada exitosamente");
             listarCarrito();
+            
         }
     }
     return{listarCarrito, agregarProducto, eliminarProducto, vaciarCarrito, confirmarCompra};
