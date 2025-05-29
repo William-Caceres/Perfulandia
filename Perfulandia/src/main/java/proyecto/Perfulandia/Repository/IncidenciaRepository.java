@@ -21,7 +21,7 @@ public class IncidenciaRepository {
         }
         // Crear una nueva instancia con los datos de la incidencia recibida
         Incidencia i = new Incidencia();
-        i.setId(newIncidencia.getId());
+        i.setId((int)newId);
         i.setNombreOpinion(newIncidencia.getNombreOpinion());
         i.setOpinion(newIncidencia.getOpinion());
         i.setMejora(newIncidencia.getMejora());
