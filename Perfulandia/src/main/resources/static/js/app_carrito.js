@@ -77,7 +77,7 @@ const carrito = (() =>{
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     destinatario: usuario,
-                    mensaje: `¡Hola ${usuario}! Tu compra por ${total} fue realizada con éxito.`
+                    mensaje: `¡Hola ${usuario}! Tu compra por ${total} Producto(s) fue realizada con éxito.`
                 }),
             });
             //refrescamos al obtener notificaciones para que le salgan de inmediato al usuario al confirmar la compra
