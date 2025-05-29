@@ -1,22 +1,18 @@
 const API_NOT = "http://localhost:8080/api/v2/notificaciones";
 
-
-//Función para obtener las notificaciones del usuario.
-
+// Función para obtener las notificaciones del usuario.
 async function obtener_notificaciones() {
-    if (!sessionStorage.getItem("nombreUsuario")) {
+    const usuario_activo = sessionStorage.getItem("nombreUsuario");
+    if (!usuario_activo) {
         alert("No hay usuario activo.");
         return;
     }
-    const usuario_activo = sessionStorage.getItem("nombreUsuario");
-    if (!usuario_activo) {
-        console.error("No hay usuario activo.");
-        return [];
-    }
-    const response = await fetch(`${API_URL}/destinatario/${usuario_activo}`);
+
+    const response = await fetch(`${API_NOT}/destinatario/${usuario_activo}`);
     const notificaciones = await response.json();
     const contenedor_notificaciones = document.getElementById("div_notificaciones");
     contenedor_notificaciones.innerHTML = "";
+
     if (Array.isArray(notificaciones) && notificaciones.length > 0) {
         contenedor_notificaciones.innerHTML = `
             <h2>Notificaciones</h2>
@@ -36,7 +32,9 @@ async function obtener_notificaciones() {
             const fila = `
                 <tr>
                     <td>${notificacion.destinatario}</td>
-                    <td style="line-height: 1; overflow-wrap: break-word; word-break: normal; white-space: pre-line;">${notificacion.mensaje.replace(/\n/g, "<br>")}</td>
+                    <td style="line-height: 1; overflow-wrap: break-word; word-break: normal; white-space: pre-line;">
+                        ${notificacion.mensaje.replace(/\n/g, "<br>")}
+                    </td>
                     <td>
                         <button onclick="eliminar_notificacion(${notificacion.id})">Eliminar</button>
                     </td>
@@ -44,14 +42,17 @@ async function obtener_notificaciones() {
             `;
             tbody.innerHTML += fila;
         });
-    }else {
-        contenedor_notificaciones.innerHTML = `
-            <h2>No hay notificaciones</h2>
-        `;
+    } else {
+        contenedor_notificaciones.innerHTML = `<h2>No hay notificaciones</h2>`;
     }
 }
 
-// Esta funcion la utilizamos para redirigir al aparatado de notificaciones
+// Función para redirigir al apartado de notificaciones.
 function redirigir_a_notificaciones() {
     window.location.href = "notificaciones.html";
 }
+
+// Llamar a la función cuando el DOM esté listo.
+document.addEventListener("DOMContentLoaded", () => {
+    obtener_notificaciones();
+});

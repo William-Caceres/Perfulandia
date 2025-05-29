@@ -16,4 +16,14 @@ public class NotificaciónService {
     public List<Notificación> get_notificaciones() {
         return notificacionRepository.findAll();
     }
+
+    //Metodo para crear una notificacion
+    public Notificación crearNotificacion(Notificación notificacion) {
+    return notificacionRepository.save(notificacion);
+}
+
+ // Método para obtener todas las notificaciones del destinatario conectado:
+    public List<Notificación> get_notificaciones_destinatario(String destinatario) {
+        return notificacionRepository.findByDestinatario(destinatario);
+    }
 }

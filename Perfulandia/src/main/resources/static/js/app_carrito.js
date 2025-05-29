@@ -67,6 +67,24 @@ const carrito = (() =>{
         }
         if(confirm(`"¿Desea confirmar la compra por ${total}?"`)){
             await fetch(`${API}/vaciar`, {method: "DELETE"})
+            //Intento de generacion de notificacion 
+            //Primero recuperamos el nombre del usuario
+            const usuario = sessionStorage.getItem("nombreUsuario");
+             if (usuario) {
+            // Crear notificación con un mensaje para el usuario :D
+            await fetch("http://localhost:8080/api/v2/notificaciones/crear", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    destinatario: usuario,
+                    mensaje: `¡Hola ${usuario}! Tu compra por ${total} fue realizada con éxito.`
+                }),
+            });
+            //refrescamos al obtener notificaciones para que le salgan de inmediato al usuario al confirmar la compra
+            obtener_notificaciones();
+
+        }
+
             alert("Compra realizada exitosamente");
             listarCarrito();
             
