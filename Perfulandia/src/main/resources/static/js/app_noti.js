@@ -52,7 +52,7 @@ function redirigir_a_notificaciones() {
 
 //me tiraba error, investigué y se debería solucionar con el comando window (espero funcione)
 // no funcionó :( , pero quedará registro del intento en el siguiente code
-window.eliminar_notificacion = async function(id) {
+function eliminar_notificacion(id) {
     if (!sessionStorage.getItem("nombreUsuario")) {
         alert("No hay usuario activo.");
         return;
@@ -62,7 +62,7 @@ window.eliminar_notificacion = async function(id) {
         console.error("No hay usuario activo.");
         return [];
     }
-    await fetch(`${API_NOT}/${id}`, {method: "DELETE"});
+    fetch(`${API_NOT}/${id}`, {method: "DELETE"});
     alert("La notificación ha sido eliminada");
     obtener_notificaciones();
 }
