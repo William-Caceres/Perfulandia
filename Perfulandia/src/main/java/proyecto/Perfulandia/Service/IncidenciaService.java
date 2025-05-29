@@ -17,7 +17,7 @@ public class IncidenciaService {
     public List<Incidencia> getIncidencias() {
         return inciRep.retorIncidencias();
     }
-
+    
     public Incidencia saveIncidencia(Incidencia inci){
         return inciRep.guardarIncidencia(inci);
     }
