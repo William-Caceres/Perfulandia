@@ -13,6 +13,7 @@ async function obtener_notificaciones() {
     const contenedor_notificaciones = document.getElementById("div_notificaciones");
     contenedor_notificaciones.innerHTML = "";
 
+    // Nos basamos en un repositorio de github como modelo y según debería funcionar para mostrarnos un diseño decente de de columnas en notificaciones
     if (Array.isArray(notificaciones) && notificaciones.length > 0) {
         contenedor_notificaciones.innerHTML = `
             <h2>Notificaciones</h2>
@@ -21,7 +22,6 @@ async function obtener_notificaciones() {
                     <tr>
                         <th>Destinatario</th>
                         <th>Mensaje</th>
-                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -33,15 +33,11 @@ async function obtener_notificaciones() {
                 <tr>
                     <td>${notificacion.destinatario}</td>
                     <td style="line-height: 1; overflow-wrap: break-word; word-break: normal; white-space: pre-line;">
-                        ${notificacion.mensaje.replace(/\n/g, "<br>")}
-                    </td>
-                    <td>
-                        <button onclick="eliminar_notificacion(${notificacion.id})">Eliminar</button>
-                    </td>
-                </tr>
-            `;
+                        ${notificacion.mensaje.replace(/\n/g, "<br>")}</td>
+                </tr>`;
             tbody.innerHTML += fila;
         });
+        //Si funcionó :D
     } else {
         contenedor_notificaciones.innerHTML = `<h2>No hay notificaciones</h2>`;
     }
@@ -50,6 +46,25 @@ async function obtener_notificaciones() {
 // Función para redirigir al apartado de notificaciones.
 function redirigir_a_notificaciones() {
     window.location.href = "notificaciones.html";
+}
+
+// Funcion para eliminar la notificacion
+
+//me tiraba error, investigué y se debería solucionar con el comando window (espero funcione)
+// no funcionó :( , pero quedará registro del intento en el siguiente code
+window.eliminar_notificacion = async function(id) {
+    if (!sessionStorage.getItem("nombreUsuario")) {
+        alert("No hay usuario activo.");
+        return;
+    }
+    const usuario_activo = sessionStorage.getItem("nombreUsuario");
+    if (!usuario_activo) {
+        console.error("No hay usuario activo.");
+        return [];
+    }
+    await fetch(`${API_NOT}/${id}`, {method: "DELETE"});
+    alert("La notificación ha sido eliminada");
+    obtener_notificaciones();
 }
 
 // Llamar a la función cuando el DOM esté listo.

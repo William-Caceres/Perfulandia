@@ -26,4 +26,9 @@ public class NotificaciónService {
     public List<Notificación> get_notificaciones_destinatario(String destinatario) {
         return notificacionRepository.findByDestinatario(destinatario);
     }
+
+    public void eliminarNotificacion(int id) {
+        // Creacion Metodo para eliminar notificacion
+        notificacionRepository.deleteById(id);
+    }
 }
