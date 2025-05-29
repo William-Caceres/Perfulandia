@@ -18,16 +18,21 @@ public class IncidenciaRepository {
             if (incidencia.getId() >= newId) {
                 newId = incidencia.getId() + 1;
             }
-            
         }
         // Crear una nueva instancia con los datos de la incidencia recibida
         Incidencia i = new Incidencia();
         i.setId(newIncidencia.getId());
-        i.setCorreo(newIncidencia.getCorreo());
-        i.setComentario(newIncidencia.getComentario());
+        i.setNombreOpinion(newIncidencia.getNombreOpinion());
+        i.setOpinion(newIncidencia.getOpinion());
+        i.setMejora(newIncidencia.getMejora());
+        i.setCalificacion(newIncidencia.getCalificacion());
 
         listaIncidencias.add(i);
         return i;
+    }   
+
+    public List<Incidencia> retorIncidencias()
+    {
+        return listaIncidencias;
     }
-    
 }

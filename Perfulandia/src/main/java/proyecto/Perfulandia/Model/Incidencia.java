@@ -1,6 +1,8 @@
 package proyecto.Perfulandia.Model;
 
 
+import java.util.Optional;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,18 +14,24 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name= "Incidencia")
+@Table(name= "incidencia")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
 
 public class Incidencia {
-     @Id
+    
+    @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     
-    private String correo;
-    private String comentario;
+    private String nombreOpinion;
+    private String opinion;
+    private String mejora;
+    private int calificacion;
     
+    public static Optional<producto> map(Object o) {
+        throw new UnsupportedOperationException("Uniplemented method 'map'");
+    }
 }

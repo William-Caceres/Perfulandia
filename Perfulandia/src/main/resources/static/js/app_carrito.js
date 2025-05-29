@@ -12,11 +12,11 @@ const carrito = (() =>{
             Producto.forEach(Producto => {
                 const fila = `
                     <tr>
-                        <td style="margin-left: 5px; margin-right: 5px;"> $${Producto.precio}</td>
-                        <td style="margin-left: 5px; margin-right: 5px;"> ${Producto.nombre}</td>
-                        <td style="margin-left: 5px; margin-right: 5px;"> ${Producto.marca}</td>
-                        <td style="margin-left: 5px; margin-right: 5px;"> ${Producto.paisOrigen}</td>
-                        <td style="margin-left: 5px; margin-right: 5px;">
+                        <td> $${Producto.precio}</td>
+                        <td> ${Producto.nombre}</td>
+                        <td> ${Producto.marca}</td>
+                        <td> ${Producto.paisOrigen}</td>
+                        <td>
                             <button onclick= "carrito.eliminarProducto(${Producto.id})">Quitar del carro </button>
                         </td>
                     </tr>
@@ -87,7 +87,6 @@ const carrito = (() =>{
 
             alert("Compra realizada exitosamente");
             listarCarrito();
-            
         }
     }
     return{listarCarrito, agregarProducto, eliminarProducto, vaciarCarrito, confirmarCompra};
