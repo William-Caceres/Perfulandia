@@ -1,18 +1,45 @@
 package proyecto.Perfulandia.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import proyecto.Perfulandia.Model.producto;
 
 @Repository
-public class productoRepository {
+public interface productoRepository extends JpaRepository<producto, Long>{
     
-    //Lista para guardar los perfumes
-    private List<producto> listaProductos = new ArrayList<>();
+    producto findById(int id);
+    public default producto actualizarProducto(producto prod){
+        producto productoNuevo = new producto();
+        productoNuevo.setId(prod.getId());
+        productoNuevo.setMarca(prod.getMarca());
+        productoNuevo.setMl(prod.getMl());
+        productoNuevo.setModelo(prod.getModelo());
+        productoNuevo.setNombre(prod.getNombre());
+        productoNuevo.setPaisOrigen(prod.getPaisOrigen());
+        productoNuevo.setPrecio(prod.getPrecio());
+        productoNuevo.setStock(prod.getStock());
+        return productoNuevo;
+    }
 
+    public default producto actualizarStock(int stock){
+        
+        producto productoNuevo = new producto();
+        productoNuevo.getId();
+        productoNuevo.getMarca();
+        productoNuevo.getMl();
+        productoNuevo.getModelo();
+        productoNuevo.getNombre();
+        productoNuevo.getPaisOrigen();
+        productoNuevo.getPrecio();
+        productoNuevo.setStock(stock);
+        return productoNuevo;
+    }
+
+    
+    /* 
     public productoRepository() {
         // PERFUMES por defecto
         listaProductos.add(new producto(1,30000,"Le fragance du France","Fragossia","Clasico","Francia",85,200));
@@ -106,4 +133,5 @@ public class productoRepository {
     {
         return listaProductos.size();
     }
+        */
 }

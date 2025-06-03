@@ -1,6 +1,7 @@
 package proyecto.Perfulandia.Controller;
 
-import java.util.List;
+import java.util.*;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +28,7 @@ public class productoController {
     @GetMapping("/listar")
     // Listar productos
     public List<producto> listarProductos(){
-        return productoService.getProductoModels();
+        return productoService.getAllProductos();
     }
 
     @PostMapping("/crear")
@@ -39,8 +40,13 @@ public class productoController {
     @GetMapping("/buscar/{id}")
     // Buscar por id
         public producto buscarProducto(@PathVariable int id){
-            return productoService.getProducto(id);
+            return productoService.getSingleProduct(id);
         }
+
+
+    /*
+
+    Metodos en cana
 
     @PutMapping("/actualizar/{id}")
     // Se busca por ID y se actualiza un producto
@@ -53,11 +59,16 @@ public class productoController {
     public String eliminarProducto(@PathVariable int id){
         return productoService.deleteProducto(id);
     }
-    
+    */
+
     @GetMapping("/total")
     // Mostrar el total
     public int totalProductosV2(){
-        return productoService.totalProductosV2();
+        int totalPrd = 0;
+        for (producto prod : productoService.getAllProductos()) {
+            totalPrd = totalPrd + 1;
+        }
+        return totalPrd;
     }
 
 

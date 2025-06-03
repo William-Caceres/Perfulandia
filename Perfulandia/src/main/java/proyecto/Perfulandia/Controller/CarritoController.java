@@ -27,9 +27,11 @@ public class CarritoController {
     //agregar Producto al carrito
     @PostMapping("/agregar/{id}")
     public String agregarProducto(@PathVariable int id) {
-        producto Producto = Productoserv.getProducto(id);
+        producto Producto = Productoserv.getSingleProduct(id);
         if (Producto != null) {
             carrito.add(Producto);
+            int newStock = Producto.getStock()-1;
+            Productoserv.updateStock(newStock);
             return "Producto se agrego al carrito: " + Producto.getNombre();
         }
         return "El Producto no fue encontrado";
