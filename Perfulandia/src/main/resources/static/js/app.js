@@ -14,14 +14,14 @@ function listarProductos() {
                     <div class="col">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">${producto.nombre}</h5>
+                                <h5 class="card-title" style="text-align: center;">${producto.nombre}</h5>
                                 <p class="card-text">-${producto.marca}-</p>
                                 <p class="card-text">Modelo ${producto.modelo}</p>
                                 <p class="card-text">Hecho en ${producto.paisOrigen}</p>
                                 <p class="card-text">contenido: ${producto.ml}ml</p>
                                 <p class="card-text">Stock disponible: ${producto.stock}</p>
                                 <h5 class="card-text">$${producto.precio}</h5>
-                                <img src="imagenes/perfume1.jpg" width="100%" height="200">
+                                <img src="imagenes/perfume1.jpg" width="100%" height="250px">
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id})">Agregar al carro</button>
@@ -45,6 +45,7 @@ function agregarProducto() {
     const pOrigen = document.getElementById("paisOrigen").value;
     const ml = parseInt(document.getElementById("ml").value);
     const stock = parseInt(document.getElementById("stock").value);
+    const ruta = document.getElementById("rImg").value;
 
     const nuevoProducto = 
     {
@@ -54,7 +55,8 @@ function agregarProducto() {
         modelo,
         pOrigen,
         ml,
-        stock
+        stock,
+        ruta
     };
 
     fetch(`${API_URL}/crear`, {
@@ -97,9 +99,10 @@ function buscarPorID(id) {
             document.getElementById("nombre").value = producto.nombre;
             document.getElementById("marca").value = producto.modelo;
             document.getElementById("modelo").value = producto.marca;
-            document.getElementById("paisOrigen").value = producto.marca;
+            document.getElementById("paisOrigen").value = producto.paisOrigen;
             document.getElementById("ml").value = producto.ml;
             document.getElementById("stock").value = producto.stock;
+            document.getElementById("rImg").value = producto.rImg;
 
             productoEnModificacion = producto.id;
 
@@ -122,6 +125,7 @@ function actualizarProducto(id) {
     const pOrigenMod = document.getElementById("paisOrigen").value;
     const mlMod = document.getElementById("ml").value;
     const stockMod = document.getElementById("stock").value;
+    const rImgMod = document.getElementById("rImg").value;
 
     const productoActualizacion = {
         id: id,
@@ -131,7 +135,8 @@ function actualizarProducto(id) {
         modelo: modeloMod,
         paisOrigen: pOrigenMod,
         ml: mlMod,
-        stock: stockMod
+        stock: stockMod,
+        rImg: rImgMod
     };
 
     fetch(`${API_URL}/actualizar/${id}`, {
@@ -156,6 +161,7 @@ function limpiarFormularioProductos() {
     document.getElementById("paisOrigen").value = "";
     document.getElementById("ml").value = "";
     document.getElementById("stock").value = "";
+    document.getElementById("rImg").value = "";
 
     const boton = document.getElementById("botonFormulario");
     boton.innerText = "Agregar Producto";
