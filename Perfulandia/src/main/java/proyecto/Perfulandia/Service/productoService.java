@@ -20,7 +20,7 @@ public class productoService {
     public producto saveProducto(producto prod){
         return productoRep.save(prod);
     }
-
+    
     public producto getSingleProduct(int id){
         return productoRep.findById(id);
     }
@@ -29,8 +29,15 @@ public class productoService {
         productoRep.delete(prod);
     }
 
-    public producto updateProducto(producto prod){
-        return productoRep.actualizarProducto(prod);
+    public void updateProducto(int id, int newStock){
+        
+        producto productoActualizar = productoRep.findById(id);
+
+        if (productoActualizar != null) {
+            producto prod = productoActualizar;
+            prod.setStock(newStock);
+            productoRep.save(prod);
+        }
     }
 
     public producto updateStock(int st){

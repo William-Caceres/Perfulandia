@@ -15,10 +15,10 @@ public class IncidenciaService {
     private IncidenciaRepository inciRep;
 
     public List<Incidencia> getIncidencias() {
-        return inciRep.retorIncidencias();
+        return inciRep.findAll();
     }
     
     public Incidencia saveIncidencia(Incidencia inci){
-        return inciRep.guardarIncidencia(inci);
+        return inciRep.save(inci);
     }
 }
