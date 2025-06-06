@@ -31,7 +31,7 @@ public class CarritoController {
         if (Producto != null) {
             carrito.add(Producto);
             int newStock = Producto.getStock()-1;
-            Productoserv.updateStock(newStock);
+            Productoserv.updateProducto(id, newStock);
             return "Producto se agrego al carrito: " + Producto.getNombre();
         }
         return "El Producto no fue encontrado";
@@ -40,6 +40,9 @@ public class CarritoController {
     //Metodo para eliminar Producto del carrito
     @DeleteMapping("/eliminar/{id}") 
     public String eliminarProducto(@PathVariable int id) {
+        producto Producto = Productoserv.getSingleProduct(id);
+        int reStock = Producto.getStock()+1;
+        Productoserv.updateProducto(id, reStock);
         boolean eliminado = carrito.removeIf(producto -> producto.getId() == id);
         return eliminado ? "Producto ha sido eliminado" : "Producto no encontrado";
     }

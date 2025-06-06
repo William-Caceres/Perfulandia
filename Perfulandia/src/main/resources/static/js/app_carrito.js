@@ -43,7 +43,7 @@ const carrito = (() =>{
     async function eliminarProducto(id) {
         try {
             await fetch(`${API}/eliminar/${id}`, {method: "DELETE"});
-            listarCarrito()
+            listarCarrito();
         } catch (err) {
             console.error("Error al eliminar del carrito")
         }
