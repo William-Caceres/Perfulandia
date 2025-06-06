@@ -97,8 +97,8 @@
     <div style="margin-left: 23px; margin-top: 22px;">
         <hr class = " my-5">
         <h2>Carrito de compras</h2>
-        <button class = "btn btn-danger mb-2" onclick = "carrito.vaciarCarrito()"> Vaciar carrito </button>
-        <button class = "btn btn-success mb-2 ms-2" onclick = "carrito.confirmarCompra()"> Confirmar compra </button>
+        <button class = "btn btn-danger mb-2" onclick = "carrito.vaciarCarrito(), listarProductos()"> Vaciar carrito </button>
+        <button class = "btn btn-success mb-2 ms-2" onclick = "carrito.confirmarCompra(), listarProductos()"> Confirmar compra </button>
         <div class ="table-responsive">
             <table id = "tablaCarrito">
                 <thead>

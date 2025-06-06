@@ -21,7 +21,7 @@ function listarProductos() {
                                 <p class="card-text">contenido: ${producto.ml}ml</p>
                                 <p class="card-text">Stock disponible: ${producto.stock}</p>
                                 <h5 class="card-text">$${producto.precio}</h5>
-                                <img src="imagenes/perfume1.jpg" width="100%" height="250px">
+                                <img src="imagenes/${producto.rImg}" width="100%" height="250px">
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id})">Agregar al carro</button>
