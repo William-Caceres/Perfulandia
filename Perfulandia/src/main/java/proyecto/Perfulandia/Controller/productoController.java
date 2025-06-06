@@ -1,7 +1,6 @@
 package proyecto.Perfulandia.Controller;
 
 import java.util.*;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
