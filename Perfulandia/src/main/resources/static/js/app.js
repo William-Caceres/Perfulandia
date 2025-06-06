@@ -21,7 +21,7 @@ function listarProductos() {
                                 <p class="card-text">contenido: ${producto.ml}ml</p>
                                 <p class="card-text">Stock disponible: ${producto.stock}</p>
                                 <h5 class="card-text">$${producto.precio}</h5>
-                                <img src="imagenes/perfume1.jpg" width="100%" height="250px">
+                                <img src= "imagenes/${producto.r_img}"width="100%" height="200px">
                             </div>
                             <div class="card-footer">
                                 <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id})">Agregar al carro</button>
@@ -45,7 +45,7 @@ function agregarProducto() {
     const pOrigen = document.getElementById("paisOrigen").value;
     const ml = parseInt(document.getElementById("ml").value);
     const stock = parseInt(document.getElementById("stock").value);
-    const ruta = document.getElementById("rImg").value;
+    const ruta = document.getElementById("r_img").value;
 
     const nuevoProducto = 
     {
@@ -102,7 +102,7 @@ function buscarPorID(id) {
             document.getElementById("paisOrigen").value = producto.paisOrigen;
             document.getElementById("ml").value = producto.ml;
             document.getElementById("stock").value = producto.stock;
-            document.getElementById("rImg").value = producto.rImg;
+            document.getElementById("r_img").value = producto.r_img;
 
             productoEnModificacion = producto.id;
 
@@ -125,7 +125,7 @@ function actualizarProducto(id) {
     const pOrigenMod = document.getElementById("paisOrigen").value;
     const mlMod = document.getElementById("ml").value;
     const stockMod = document.getElementById("stock").value;
-    const rImgMod = document.getElementById("rImg").value;
+    const r_imgMod = document.getElementById("r_img").value;
 
     const productoActualizacion = {
         id: id,
@@ -136,7 +136,7 @@ function actualizarProducto(id) {
         paisOrigen: pOrigenMod,
         ml: mlMod,
         stock: stockMod,
-        rImg: rImgMod
+        r_img: r_imgMod
     };
 
     fetch(`${API_URL}/actualizar/${id}`, {
@@ -161,7 +161,7 @@ function limpiarFormularioProductos() {
     document.getElementById("paisOrigen").value = "";
     document.getElementById("ml").value = "";
     document.getElementById("stock").value = "";
-    document.getElementById("rImg").value = "";
+    document.getElementById("r_img").value = "";
 
     const boton = document.getElementById("botonFormulario");
     boton.innerText = "Agregar Producto";

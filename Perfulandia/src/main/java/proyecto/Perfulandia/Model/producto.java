@@ -29,7 +29,7 @@ public class producto {
     private String paisOrigen;
     private int ml;
     private int stock;
-    private String rImg; 
+    private String r_img; 
 
     public static Optional<producto> map(Object o) {
         throw new UnsupportedOperationException("Uniplemented method 'map'");
