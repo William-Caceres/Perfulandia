@@ -27,8 +27,22 @@ import org.springframework.http.MediaType;
 // PASO 8, importar MockMvc para realizar peticiones http
 import org.springframework.test.web.servlet.MockMvc;
 
-// PASO 9, 
+// PASO 9, importar las clases necesarias para realizar las peticiones HTTP simuladas
+// POST, GET, DELTE, PUT
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+// PASO 10, importar las clases necesarias para verificar los resultados de las peticiones
+// http simuladas
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+// PASO 11, importar "any" para simular los argumentos en los metodos del servicio de ususario
+import static org.mockito.ArgumentMatchers.any;
+
+// PASO 12, importar mockito para simular el comportamiento de los metodos del servicio usuario con when
+import static org.mockito.Mockito.when;
+
+// PASO 13, importar JAVA util Optional
+import java.util.Optional;
 
 public class UsuarioControllerIntegrationTest {
     
