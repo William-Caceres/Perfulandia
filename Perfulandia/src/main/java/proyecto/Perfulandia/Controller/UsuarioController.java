@@ -35,6 +35,9 @@ public class UsuarioController {
             if (user.isPresent()) {
                 respuesta.put("result", "OK");
                 respuesta.put("nombre", user.get().getNombre());
+                //solo para el test 
+                respuesta.put("email", user.get().getEmail());
+                respuesta.put("password", user.get().getPassword());
             }
             else{
                 respuesta.put("result", "ERROR");

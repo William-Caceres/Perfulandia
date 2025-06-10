@@ -73,5 +73,59 @@ public class UsuarioControllerIntegrationTest {
         //COMPORTAMIENTO DEL METODO REGISTRAR DE SERVICE
         when(usuarioService.registrar(any(usuario.class)))
             .thenReturn(newUser);
+
+            //Simular la peticion POST  de usuarioController para registrar un nuevo usuario
+        mockMvc.perform(post("/api/v1/usuarios/registrar")//RUTA igual de usuario controller
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(newUser)))
+            .andExpect(status().isOk()) //verificamos que la respuesta al metodo sea un esto 200 OK
+            .andExpect(jsonPath("$.nombre").value("Camilo"))  //verificamos que el nombre del usuario simulado sea correcto 
+            .andExpect(jsonPath("$.email").value("camilo@gmail.com"))//verificamos que el correo del usuario simulado sea correcto
+            .andExpect(jsonPath("$.password").value("1234"));//verificamos que la password del usuario simulado sea correcto
     }   
+       
+    //Test para simular el inicio de sesion de un usuario registrado
+    @Test
+    void loginUsuario_ReturnOK() throws Exception {
+        usuario userExistente = new usuario();
+        userExistente.setNombre("Camilo");
+        userExistente.setEmail("camilo@gmail.com");
+        userExistente.setPassword("1234");
+
+        //Simular el comportamiento del metodo autenticar del usuarioService con un usuario registrado
+        when(usuarioService.autenticar("camilo@gmail.com","1234"))
+            .thenReturn(Optional.of(userExistente));
+
+        //Simular la peticion POST en usuarioController para autenticar el login un usuario registrado
+        mockMvc.perform(post("/api/v1/usuarios/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(userExistente)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.result").value("OK"))
+            .andExpect(jsonPath("$.nombre").value("Camilo"))
+            .andExpect(jsonPath("$.email").value("camilo@mail.com"))
+            .andExpect(jsonPath("$.password").value("1234"));
+    }
+
+    //Test para simular el login de un usuario no registrado
+
+    @Test
+    void loginUsuario_ReturnError() throws Exception {
+        usuario usuarioInexistente = new usuario();
+        usuarioInexistente.setEmail("noexiste@gmail.com");
+        usuarioInexistente.setPassword("1234");
+
+        //Simular el comportamiento del metodo autenticar con un usuario no registrado
+
+        when(usuarioService.autenticar("noexiste@gmail.com", "1234"))
+            .thenReturn(Optional.empty());
+
+        //Simular la peticicion POST del usuarioController para iniciar sesion por un usuario no registrado
+
+        mockMvc.perform(post("/api/v1/usuarios/login")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(usuarioInexistente)))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("result", "ERROR"));
+    }
 }
