@@ -44,6 +44,34 @@ import static org.mockito.Mockito.when;
 // PASO 13, importar JAVA util Optional
 import java.util.Optional;
 
+
+// usar la anotacion WebMvctest para crear una prueba a un controlador especifico
+@WebMvcTest(UsuarioController.class)
 public class UsuarioControllerIntegrationTest {
     
+    @Autowired
+    //Inyectar MockMvc para realizar las operaciones HTTP simuladas
+    //Lo creamos con un alias para poder usarlo en nuestor servicio
+    private MockMvc mockMvc;    
+    @MockBean
+    private UsuarioService usuarioService;
+
+    //Usar ObjectMapper para convertir los objetos a JSON
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    //Test para simular el registro de un nuevo usuari
+    @Test
+    void registraUsuario_retornaGuardar() throws Exception{
+        usuario newUser = new usuario(); //Crear una instancia de usuario
+        newUser.setNombre("Camilo");//Establecer nombre
+        newUser.setNombre("camilo@gmail.com");//Establecer email
+        newUser.setNombre("1234");//Establecer contra
+        //Todo esto es una simulacion
+
+        //TODO HASTA AHORA ES LA CAPA MODELO, AHORA VAMOS A SIMULAR EL 
+        //COMPORTAMIENTO DEL METODO REGISTRAR DE SERVICE
+        when(usuarioService.registrar(any(usuario.class)))
+            .thenReturn(newUser);
+    }   
 }
