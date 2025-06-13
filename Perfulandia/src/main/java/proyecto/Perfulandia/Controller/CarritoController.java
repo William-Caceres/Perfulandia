@@ -42,22 +42,33 @@ public class CarritoController {
     public String eliminarProducto(@PathVariable int id) {
         producto Producto = Productoserv.getSingleProduct(id);
         int reStock = Producto.getStock()+1;
-        Productoserv.updateProducto(id, reStock);
-        boolean eliminado = carrito.removeIf(producto -> producto.getId() == id);
-        return eliminado ? "Producto ha sido eliminado" : "Producto no encontrado";
-    }
-    
-    //Metodo para ver el carrito
-    @GetMapping
-    public List<producto> verCarrito() {
-        return carrito;
+        for (producto prod : carrito) {
+            if (prod.getId() == id) {
+                Productoserv.updateProducto(id, reStock);
+                carrito.removeFirst();
+                break;
+            }
+        }
+        return "Producto no encontrado";
     }
 
     //Metodo para vaciar el carrito de compras
     @DeleteMapping("/vaciar")
     public String vaciarCarrito(){
+        for (producto producto : carrito) {
+            int id = producto.getId();
+            int reStock = producto.getStock()+1;
+            Productoserv.updateProducto(id, reStock);
+        }
+        
         carrito.clear();
         return "El carrito se ha vaciado";
+    }
+
+    //Metodo para ver el carrito
+    @GetMapping
+    public List<producto> verCarrito() {
+        return carrito;
     }
     
     //Metodo para contar los items del carrito

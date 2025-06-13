@@ -87,5 +87,7 @@ const carrito = (() =>{
             listarCarrito();
         }
     }
+    
+    listarCarrito()
     return{listarCarrito, agregarProducto, eliminarProducto, vaciarCarrito, confirmarCompra};
-}) ();
+}) (); 
