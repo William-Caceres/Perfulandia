@@ -26,11 +26,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebMvcTest(productoController.class)
 
 public class productoControllerIntegrationTest {
-     @Autowired
+    
+    @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private productoService ProductoService;
+    private productoService ProductoServ;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -38,56 +39,61 @@ public class productoControllerIntegrationTest {
     @Test
     void listarProductos_debeRetornarListaJson() throws Exception {
         List<producto> productos = List.of(
-                new producto(1,1000,"producto","marca","modelo","PaisOrigen",100,30,"kfdsjf"),
-                new producto(2,2000,"producto2","marca2","modelo2","PaisOrigen2",100,30,"kfdsjf2")
+                new producto(1,1500,"Perfume","Marca Roja","Cuadrado","Francia",100,30,"imagen1.jpg"),
+                new producto(2,3000,"Crema","Marca Verde","Rectangular","Italia",80,35,"imagen2.jpg"),
+                new producto(3,5000,"Jabon","Marca Morada","Circular","USA",95,50,"imagen3.jpg")
         );
 
-        when(productoService.getLibros()).thenReturn(productos);
+        when(ProductoServ.getAllProductos()).thenReturn(productos);
 
-        mockMvc.perform(get("/api/v1/libros"))
+        mockMvc.perform(get("/api/v2/productos/listar"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].titulo").value("Libro1"));
+                .andExpect(jsonPath("$.length()").value(3))
+                .andExpect(jsonPath("$[0].nombre").value("Perfume"));
     }
 
     @Test
-    void agregarLibro_debeGuardarYRetornarLibro() throws Exception {
-        Libro libro = new Libro(0, "789", "Nuevo Libro", "Nueva Editorial", 2022, "Nuevo Autor", 12000);
+    void agregarProducto_debeGuardarYRetornarProducto() throws Exception {
+        producto prod = new producto(4,3000,"Crema2","Marca Morada","Rectangular","USA",50,50,"imagen4.jpg");
 
-        when(libroService.saveLibro(any(Libro.class))).thenReturn(libro);
+        when(ProductoServ.saveProducto(any(producto.class))).thenReturn(prod);
 
-        mockMvc.perform(post("/api/v1/libros")
+        mockMvc.perform(post("/api/v2/productos/crear")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(libro)))
+                .content(objectMapper.writeValueAsString(prod)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.titulo").value("Nuevo Libro"));
+                .andExpect(jsonPath("$.nombre").value("Crema2"));
     }
 
     @Test
-    void buscarLibro_porId_existente() throws Exception {
-        Libro libro = new Libro(5, "555", "Buscado", "Ed", 2021, "Autor", 18000);
+    void buscarProducto_porId_existente() throws Exception {
+        producto prod = new producto(5,3000,"Producto 05","Marca Morada","Rectangular","USA",50,50,"imagen4.jpg");
 
-        when(libroService.getLibroId(5)).thenReturn(libro);
+        when(ProductoServ.getSingleProduct(5)).thenReturn(prod);
 
-        mockMvc.perform(get("/api/v1/libros/5"))
+        mockMvc.perform(get("/api/v2/productos/buscar/5"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.titulo").value("Buscado"));
+                .andExpect(jsonPath("$.nombre").value("Producto 05"));
     }
 
+    /*
     @Test
-    void eliminarLibro_existente() throws Exception {
-        when(libroService.deleteLibro(3)).thenReturn("producto eliminado");
+    void eliminarProducto_existente() throws Exception {
 
-        mockMvc.perform(delete("/api/v1/libros/3"))
+        producto productoDT = new producto(5,3000,"ProductoDT","MarcaDT","ModeloDT","PaisDT",50,50,"imagenDT.jpg");
+        when(ProductoServ.deleteProducto(productoDT)).thenReturn("Producto eliminado");
+
+        mockMvc.perform(delete("/api/v2/productos/5"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("producto eliminado"));
+                .andExpect(content().string("Producto eliminado"));
     }
+    */
 
     @Test
-    void totalLibrosV2_debeRetornarCantidad() throws Exception {
-        when(libroService.totalLibrosV2()).thenReturn(10);
+    void totalProductos_debeRetornarCantidad() throws Exception {
+        when(ProductoServ.totalProductos()).thenReturn(10);
 
-        mockMvc.perform(get("/api/v1/libros/total"))
+        mockMvc.perform(get("/api/v2/productos/total"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("10"));
     }

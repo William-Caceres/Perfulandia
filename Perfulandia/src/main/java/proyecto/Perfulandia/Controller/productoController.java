@@ -62,12 +62,14 @@ public class productoController {
 
     @GetMapping("/total")
     // Mostrar el total
-    public int totalProductosV2(){
+    public int totalProductos(){
+        /*
         int totalPrd = 0;
         for (producto prod : productoService.getAllProductos()) {
             totalPrd = totalPrd + 1;
         }
-        return totalPrd;
+        */
+        return productoService.totalProductos();
     }
 
 

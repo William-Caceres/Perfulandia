@@ -65,11 +65,10 @@ public class UsuarioControllerIntegrationTest {
     void registraUsuario_retornaGuardar() throws Exception{
         usuario newUser = new usuario(); //Crear una instancia de usuario
         newUser.setNombre("Camilo");//Establecer nombre
-        newUser.setNombre("camilo@gmail.com");//Establecer email
-        newUser.setNombre("1234");//Establecer contra
+        newUser.setEmail("camilo@gmail.com");//Establecer email
+        newUser.setPassword("1234");//Establecer contra
         //Todo esto es una simulacion
 
-        //TODO HASTA AHORA ES LA CAPA MODELO, AHORA VAMOS A SIMULAR EL 
         //COMPORTAMIENTO DEL METODO REGISTRAR DE SERVICE
         when(usuarioService.registrar(any(usuario.class)))
             .thenReturn(newUser);
@@ -103,7 +102,7 @@ public class UsuarioControllerIntegrationTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.result").value("OK"))
             .andExpect(jsonPath("$.nombre").value("Camilo"))
-            .andExpect(jsonPath("$.email").value("camilo@mail.com"))
+            .andExpect(jsonPath("$.email").value("camilo@gmail.com"))
             .andExpect(jsonPath("$.password").value("1234"));
     }
 
@@ -126,6 +125,6 @@ public class UsuarioControllerIntegrationTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(usuarioInexistente)))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("result", "ERROR"));
+        .andExpect(jsonPath("$.result").value("ERROR"));
     }
 }

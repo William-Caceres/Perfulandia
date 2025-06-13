@@ -25,8 +25,9 @@ public class productoService {
         return productoRep.findById(id);
     }
 
-    public void deleteProducto(producto prod){
+    public String deleteProducto(producto prod){
         productoRep.delete(prod);
+        return "Producto eliminado";
     }
 
     public void updateProducto(int id, int newStock){
@@ -44,6 +45,9 @@ public class productoService {
         return productoRep.actualizarStock(st);
     }
 
+    public int totalProductos(){
+        return productoRep.findAll().size();
+    }
 
     /*
     // OBTENER/RECUPERAR TODOS LOS ProductoS
