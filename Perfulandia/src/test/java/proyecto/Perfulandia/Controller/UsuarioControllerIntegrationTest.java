@@ -69,7 +69,7 @@ public class UsuarioControllerIntegrationTest {
         newUser.setNombre("1234");//Establecer contra
         //Todo esto es una simulacion
 
-        //TODO HASTA AHORA ES LA CAPA MODELO, AHORA VAMOS A SIMULAR EL 
+   
         //COMPORTAMIENTO DEL METODO REGISTRAR DE SERVICE
         when(usuarioService.registrar(any(usuario.class)))
             .thenReturn(newUser);
@@ -126,6 +126,6 @@ public class UsuarioControllerIntegrationTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(usuarioInexistente)))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("result", "ERROR"));
+        .andExpect(jsonPath("$.result").value("ERROR")); // Verificar que el resultado sea "Error"
     }
 }
