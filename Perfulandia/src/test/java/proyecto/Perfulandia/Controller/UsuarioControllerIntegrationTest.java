@@ -125,6 +125,6 @@ public class UsuarioControllerIntegrationTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(usuarioInexistente)))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.result").value("ERROR"));
+        .andExpect(jsonPath("$.result").value("ERROR")); // Verificar que el resultado sea "Error"
     }
 }
