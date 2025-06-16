@@ -15,7 +15,6 @@ import proyecto.Perfulandia.Model.producto;
 import proyecto.Perfulandia.Service.productoService;
 
 
-
 @RestController
 @RequestMapping("/api/v2/carrito")
 public class CarritoController {
@@ -46,10 +45,10 @@ public class CarritoController {
             if (prod.getId() == id) {
                 Productoserv.updateProducto(id, reStock);
                 carrito.removeFirst();
-                break;
+                return "Producto eliminado del carrito";
             }
         }
-        return "Producto no encontrado";
+        return "No se pudo eliminar el producto seleccionado";
     }
 
     //Metodo para vaciar el carrito de compras
@@ -57,16 +56,15 @@ public class CarritoController {
     public String vaciarCarrito(){
         for (producto producto : carrito) {
             int id = producto.getId();
-            int reStock = producto.getStock()+1;
-            Productoserv.updateProducto(id, reStock);
+            producto prod = Productoserv.getSingleProduct(id);
+            Productoserv.updateProducto(id, prod.getStock() + 1);
         }
-        
         carrito.clear();
         return "El carrito se ha vaciado";
     }
 
     //Metodo para ver el carrito
-    @GetMapping
+    @GetMapping("/listar")
     public List<producto> verCarrito() {
         return carrito;
     }

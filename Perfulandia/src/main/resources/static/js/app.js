@@ -24,7 +24,7 @@ function listarProductos() {
                                 <img src="imagenes/${producto.r_img}"width="100%" height="200px">
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id})">Agregar al carro</button>
+                                <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id}); listarProductos()">Agregar al carro</button>
                             </div>
                         </div>
                     </div>`;

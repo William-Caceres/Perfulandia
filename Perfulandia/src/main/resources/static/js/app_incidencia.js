@@ -5,7 +5,7 @@ function registrarIncidencia(){
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-            nombre_opinion: document.getElementById("nomopi").value,
+            nombre_opinion: document.getElementById("nombre_opinion").value,
             opinion:        document.getElementById("opinion").value,
             mejora:         document.getElementById("mejora").value,
             calificacion:   parseInt(document.getElementById("calificacion").value)
@@ -30,7 +30,7 @@ function listarIncidencias(){
                         <div class="card h-100">
                             <div class="card-body">
                                 <p class="card-text">ID registro: ${ins.id}</p>
-                                <p class="card-text">Mi opinion (${ins.nomopi}),<br> ${ins.opinion}</p>
+                                <p class="card-text">Mi opinion (${ins.nombre_opinion}),<br> ${ins.opinion}</p>
                                 <p class="card-text">¿Que podria mejorar?<br> ${ins.mejora}</p>
                             </div>
                             <div class="card-footer">

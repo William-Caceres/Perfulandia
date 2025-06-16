@@ -5,25 +5,25 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import proyecto.Perfulandia.Model.Notificación;
-import proyecto.Perfulandia.Repository.NotificaciónRepository;
+import proyecto.Perfulandia.Model.Notificacion;
+import proyecto.Perfulandia.Repository.NotificacionRepository;
 
 @Service
-public class NotificaciónService {
+public class NotificacionService {
     @Autowired
-    private NotificaciónRepository notificacionRepository;
+    private NotificacionRepository notificacionRepository;
     // Método para obtener todas las notificaciones del sistema:
-    public List<Notificación> get_notificaciones() {
+    public List<Notificacion> getAllNotificaciones() {
         return notificacionRepository.findAll();
     }
 
     //Metodo para crear una notificacion
-    public Notificación crearNotificacion(Notificación notificacion) {
+    public Notificacion saveNotificacion(Notificacion notificacion) {
     return notificacionRepository.save(notificacion);
 }
 
  // Método para obtener todas las notificaciones del destinatario conectado:
-    public List<Notificación> get_notificaciones_destinatario(String destinatario) {
+    public List<Notificacion> getNotificacionesDestinatario(String destinatario) {
         return notificacionRepository.findByDestinatario(destinatario);
     }
 

@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import proyecto.Perfulandia.Model.Notificación;
-import proyecto.Perfulandia.Service.NotificaciónService;
+import proyecto.Perfulandia.Model.Notificacion;
+import proyecto.Perfulandia.Service.NotificacionService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,27 +21,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/api/v2/notificaciones")
 public class NotificacionController {
     @Autowired
-    private NotificaciónService notificaciónService;
+    private NotificacionService notificacionService;
     // Método que se usará para obtener todas las notificaciones existentes del sistema
     @GetMapping
-    public List<Notificación> listar_notificaciones() {
-        return notificaciónService.get_notificaciones();
+    public List<Notificacion> listar_notificaciones() {
+        return notificacionService.getAllNotificaciones();
     }
     // agregar endpoint para notificaciones
     @PostMapping("/crear")
-    public Notificación crearNotificación(@RequestBody Notificación notificación) {
-        return notificaciónService.crearNotificacion(notificación);
+    public Notificacion crearNotificacion(@RequestBody Notificacion notificacion) {
+        return notificacionService.saveNotificacion(notificacion);
     }
 
     // Método para obtener todas las notificaciones del destinatario conectado:
     @GetMapping("/destinatario/{destinatario}")
-    public List<Notificación> notificacionesPorUsuario(@PathVariable String destinatario) {
-        return notificaciónService.get_notificaciones_destinatario(destinatario);
+    public List<Notificacion> notificacionesPorUsuario(@PathVariable String destinatario) {
+        return notificacionService.getNotificacionesDestinatario(destinatario);
     }
 
-    // Metodo para eliminar las notificaciones del usuario conectado
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarNotificacion(@PathVariable int id) {notificaciónService.eliminarNotificacion(id);
+    // Metodo para eliminar las notificaciones del usuario conectado SIN USAR
+    /*
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminarNotificacion(@PathVariable int id) {notificacionService.eliminarNotificacion(id);
     return ResponseEntity.noContent().build();}
-    
+    */
 }

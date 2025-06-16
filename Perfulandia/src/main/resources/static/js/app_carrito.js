@@ -2,7 +2,7 @@ const carrito = (() =>{
     const API = "http://localhost:8080/api/v2/carrito";
     async function listarCarrito() {
         try {
-            const response = await fetch(API);
+            const response = await fetch(`${API_URL}/listar`);
             const Producto = await response.json();
             const tbody = document.querySelector("#tablaCarrito tbody");
             const totalItems = document.getElementById("totalCarrito");
@@ -16,6 +16,7 @@ const carrito = (() =>{
                         <td> ${Producto.nombre}</td>
                         <td> ${Producto.marca}</td>
                         <td> ${Producto.paisOrigen}</td>
+                        <td> ${Producto.stock}</td>
                         <td>
                             <button onclick= "carrito.eliminarProducto(${Producto.id})">Quitar del carro </button>
                         </td>
@@ -34,6 +35,7 @@ const carrito = (() =>{
                  {method: "POST"});
             alert("El Producto ha sido agregado");
             listarCarrito();
+            listarProductos();
         } catch (err) { 
             console.error("Error al agregar el Producto al carrito", err);
         }
@@ -44,6 +46,7 @@ const carrito = (() =>{
         try {
             await fetch(`${API}/eliminar/${id}`, {method: "DELETE"});
             listarCarrito();
+            listarProductos();
         } catch (err) {
             console.error("Error al eliminar del carrito")
         }
@@ -55,6 +58,7 @@ const carrito = (() =>{
             await fetch(`${API}/vaciar`, {method: "DELETE"})
             alert("Carrito vaciado");
             listarCarrito();
+            listarProductos();
         }
     }
 
@@ -85,6 +89,7 @@ const carrito = (() =>{
         }
             alert("Compra realizada exitosamente");
             listarCarrito();
+            listarProductos();
         }
     }
     
