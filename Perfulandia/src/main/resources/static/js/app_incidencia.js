@@ -1,4 +1,4 @@
-const API_INS = "http://localhost:8080/api/v2/incidencia"
+const API_INS = "http://10.155.67.163:8080/api/v2/incidencia"
 
 function registrarIncidencia(){
     fetch(`${API_INS}/crear`, {

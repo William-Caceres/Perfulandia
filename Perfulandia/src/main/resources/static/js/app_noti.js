@@ -1,4 +1,4 @@
-const API_NOT = "http://localhost:8080/api/v2/notificaciones";
+const API_NOT = "http://10.155.67.163:8080/api/v2/notificaciones";
 
 // Función para obtener las notificaciones del usuario.
 async function obtener_notificaciones() {
