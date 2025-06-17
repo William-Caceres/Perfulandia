@@ -1,5 +1,5 @@
 const carrito = (() =>{
-    const API = "http://localhost:8080/api/v2/carrito";
+    const API = "http://10.155.67.163:8080/api/v2/carrito";
     async function listarCarrito() {
         try {
             const response = await fetch(`${API_URL}/listar`);

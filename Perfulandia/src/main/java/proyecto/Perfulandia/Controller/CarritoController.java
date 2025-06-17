@@ -14,9 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 import proyecto.Perfulandia.Model.producto;
 import proyecto.Perfulandia.Service.productoService;
 
+//Importar las librerias de SWAGGER para la documentacion de las APIs
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v2/carrito")
+
+//Agregar anotacion Tag para darle nombre y descripcion a la API
+@Tag(name = "Carrto de compras y gestion de STOCK",
+description = "Operaciones sobre el carrito de compras")
 public class CarritoController {
     private final List<producto> carrito = new ArrayList<>();
 
@@ -24,6 +31,12 @@ public class CarritoController {
     private productoService Productoserv;
 
     //agregar Producto al carrito
+    //Agregar anotacion Operation para documentar cada endpoint o metodo REST
+    @Operation(summary = "Agrega un producto al Carrito de compras", 
+    description = "Este metodo agrega un producto al carrito de compras, por su id,"+
+    " verificando que el producto exista, en conjunto a esto, se le resta al stock "+
+    "del producto una unidad, esto para la gestion de STOCK")
+
     @PostMapping("/agregar/{id}")
     public String agregarProducto(@PathVariable int id) {
         producto Producto = Productoserv.getSingleProduct(id);
@@ -37,6 +50,11 @@ public class CarritoController {
     }
     
     //Metodo para eliminar Producto del carrito
+    @Operation(summary = "Quita un producto del Carrito de compras",
+    description = "Quita un producto del carrito de compras segun su id, en conjunto"+
+    " a esto, al quitar un producto se le suma una unidad al stock del producto que "+
+    "fue removido del Carrito")
+
     @DeleteMapping("/eliminar/{id}") 
     public String eliminarProducto(@PathVariable int id) {
         producto Producto = Productoserv.getSingleProduct(id);
@@ -52,6 +70,10 @@ public class CarritoController {
     }
 
     //Metodo para vaciar el carrito de compras
+    @Operation(summary = "Vacia por completo el carrito de compras",
+    description = "Quita todos los productos del carrito de compras, tambien restaura"+
+    " el stock de estos antes de que fueran agregados al carro") 
+
     @DeleteMapping("/vaciar")
     public String vaciarCarrito(){
         for (producto producto : carrito) {
@@ -64,12 +86,21 @@ public class CarritoController {
     }
 
     //Metodo para ver el carrito
+    @Operation(summary = "Carga la lista de productos que estan en el carrito",
+    description = "Este metodo es para recargar la lista de productos que esten en el"+
+    " carrito en ese momento, sirve principalmente para refrescar los cambios que se "+
+    "apliquen sobre esta") 
+
     @GetMapping("/listar")
     public List<producto> verCarrito() {
         return carrito;
     }
     
     //Metodo para contar los items del carrito
+    @Operation(summary = "Contar el total de productos dentro del carrito",
+    description = "Este metodo cuenta la cantidad de productos que estan dentro del"+
+    " carrito en ese momento") 
+
     @GetMapping("/total")
     public int totalLibrosCarrito() {
         return carrito.size();
