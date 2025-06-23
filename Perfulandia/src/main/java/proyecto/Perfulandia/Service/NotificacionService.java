@@ -17,6 +17,10 @@ public class NotificacionService {
         return notificacionRepository.findAll();
     }
 
+    public Notificacion getSingleNotificacion(int id) {
+        return notificacionRepository.findById(id);
+    }
+
     //Metodo para crear una notificacion
     public Notificacion saveNotificacion(Notificacion notificacion) {
     return notificacionRepository.save(notificacion);

@@ -14,10 +14,14 @@ public class IncidenciaService {
     @Autowired
     private IncidenciaRepository inciRep;
 
-    public List<Incidencia> getIncidencias() {
+    public List<Incidencia> getAllIncidencias() {
         return inciRep.findAll();
     }
     
+    public Incidencia getSingleIncidencia(int id) {
+        return inciRep.findById(id);
+    }
+
     public Incidencia saveIncidencia(Incidencia inci){
         return inciRep.save(inci);
     }

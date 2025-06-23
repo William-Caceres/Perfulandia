@@ -11,6 +11,6 @@ import proyecto.Perfulandia.Model.Notificacion;
 
 @Repository
 public interface NotificacionRepository extends JpaRepository<Notificacion, Integer> {
-    Optional<Notificacion> findById(int id);
+    Notificacion findById(int id);
     List<Notificacion> findByDestinatario(String destinatario);
 }

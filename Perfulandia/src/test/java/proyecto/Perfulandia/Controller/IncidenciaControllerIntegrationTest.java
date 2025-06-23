@@ -44,7 +44,7 @@ public class IncidenciaControllerIntegrationTest {
                 new Incidencia(3,"Agriculis","Talves el lugar que mas extraño","Talves evitar los conflictos",10)
         );
 
-        when(inciServ.getIncidencias()).thenReturn(incidencias);
+        when(inciServ.getAllIncidencias()).thenReturn(incidencias);
 
         mockMvc.perform(get("/api/v2/incidencia/listar"))
                 .andExpect(status().isOk())

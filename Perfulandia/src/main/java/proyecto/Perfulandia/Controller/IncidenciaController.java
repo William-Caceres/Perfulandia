@@ -32,7 +32,7 @@ public class IncidenciaController {
 
     @GetMapping("/listar")
     public List<Incidencia> listarIncidencias() {
-        return inciServ.getIncidencias();
+        return inciServ.getAllIncidencias();
     }
     
     //GUARDAR

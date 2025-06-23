@@ -32,7 +32,7 @@ public class NotificacionController {
     @Operation(summary = "Listar notificaciones",
     description = "Lista todas las notificaciones que estan registradas en el sistema")
 
-    @GetMapping
+    @GetMapping("/listar")
     public List<Notificacion> listar_notificaciones() {
         return notificacionService.getAllNotificaciones();
     }
