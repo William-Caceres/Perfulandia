@@ -31,8 +31,9 @@ public class NotificacionService {
         return notificacionRepository.findByDestinatario(destinatario);
     }
 
-    public void eliminarNotificacion(int id) {
+    public String deleteNotificacion(int id) {
         // Creacion Metodo para eliminar notificacion
         notificacionRepository.deleteById(id);
+        return "OK";
     }
 }

@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/v2/carrito")
+@RequestMapping("/api/v1/carrito")
 
 //Agregar anotacion Tag para darle nombre y descripcion a la API
 @Tag(name = "Carrto de compras y gestion de STOCK",
@@ -83,6 +83,15 @@ public class CarritoController {
         }
         carrito.clear();
         return "El carrito se ha vaciado";
+    }
+
+    @Operation(summary = "Vacia el carrito tras realizar una compra",
+    description = "Quita todos los productos del carrito de compras pero no modifica el stock") 
+
+    @DeleteMapping("/vcompra")
+    public String vaciarComprar(){
+        carrito.clear();
+        return "Carrito vaciado tras compra";
     }
 
     //Metodo para ver el carrito

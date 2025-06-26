@@ -1,7 +1,7 @@
 package proyecto.Perfulandia.assemblers;
 
 import proyecto.Perfulandia.Model.usuario;
-import proyecto.Perfulandia.Controller.UsuarioControllerV3;
+import proyecto.Perfulandia.Controller.UsuarioControllerV2;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.hateoas.EntityModel;
@@ -17,9 +17,9 @@ RepresentationModelAssembler<usuario, EntityModel<usuario>> {
     @Override
     public @NonNull EntityModel<usuario> toModel(usuario user) {
         return EntityModel.of(user,
-        linkTo(methodOn(UsuarioControllerV3.class).registrar(null))
+        linkTo(methodOn(UsuarioControllerV2.class).registrar(null))
         .withRel("registrar"),
-        linkTo(methodOn(UsuarioControllerV3.class).login(user))
+        linkTo(methodOn(UsuarioControllerV2.class).login(user))
         .withRel("login")
         );
     }

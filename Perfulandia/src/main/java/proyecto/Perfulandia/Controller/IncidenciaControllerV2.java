@@ -21,8 +21,6 @@ import proyecto.Perfulandia.Model.Incidencia;
 import proyecto.Perfulandia.Service.IncidenciaService;
 import proyecto.Perfulandia.assemblers.IncidenciaModelAssembler;
 
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.MediaTypes;
@@ -31,11 +29,11 @@ import org.springframework.http.ResponseEntity;
 
 
 @RestController
-@RequestMapping("/api/v3/incidencia")
+@RequestMapping("/api/v2/incidencia")
 
 @Tag(name = "Incidencias",
 description = "Este controlador permite al usuario ingresar una incidencia/opinion sobre el sistema, a traves de un formulario")
-public class IncidenciaControllerV3 {
+public class IncidenciaControllerV2 {
     
     @Autowired
     private IncidenciaService inciServ;
@@ -55,7 +53,7 @@ public class IncidenciaControllerV3 {
             .map(assembler::toModel)
             .collect(Collectors.toList());
         return CollectionModel
-            .of(incidencias, linkTo(methodOn(IncidenciaControllerV3.class)
+            .of(incidencias, linkTo(methodOn(IncidenciaControllerV2.class)
             .listarIncidencias()).withSelfRel());
     }
     
@@ -75,7 +73,7 @@ public class IncidenciaControllerV3 {
     public ResponseEntity<EntityModel<Incidencia>> agregarIncidencia(@RequestBody Incidencia incidencia){
         Incidencia crear = inciServ.saveIncidencia(incidencia);
         return ResponseEntity
-            .created(linkTo(methodOn(IncidenciaControllerV3.class)
+            .created(linkTo(methodOn(IncidenciaControllerV2.class)
             .buscarIncidencia(crear.getId())).toUri()).body(assembler.toModel(crear));
     }
 }

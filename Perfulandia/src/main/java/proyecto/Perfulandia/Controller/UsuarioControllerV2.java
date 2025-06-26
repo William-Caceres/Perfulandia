@@ -28,12 +28,12 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/api/v3/usuarios")
+@RequestMapping("/api/v2/usuarios")
 @CrossOrigin
 
 @Tag(name = "Usuarios y autentificacion",
 description = "Este controlador permite que un usuario se registre (guardar en la BDD) e inicie sesion")
-public class UsuarioControllerV3 {
+public class UsuarioControllerV2 {
     
     @Autowired
     private UsuarioService serv;
@@ -48,7 +48,7 @@ public class UsuarioControllerV3 {
         public ResponseEntity<EntityModel<usuario>> registrar(@RequestBody usuario u) {
             usuario creado = serv.registrar(u);
             return ResponseEntity
-                .created(linkTo(methodOn(UsuarioControllerV3.class)
+                .created(linkTo(methodOn(UsuarioControllerV2.class)
                 .registrar(creado)).toUri()).body(assembler.toModel(creado));
         }
 
@@ -72,8 +72,8 @@ public class UsuarioControllerV3 {
             }
 
             EntityModel<Map<String, String>> model = EntityModel.of(respuesta);
-            model.add(linkTo(methodOn(UsuarioControllerV3.class).login(u)).withSelfRel());
-            model.add(linkTo(methodOn(UsuarioControllerV3.class).registrar(new usuario())).withRel("registrar"));
+            model.add(linkTo(methodOn(UsuarioControllerV2.class).login(u)).withSelfRel());
+            model.add(linkTo(methodOn(UsuarioControllerV2.class).registrar(new usuario())).withRel("registrar"));
 
             return ResponseEntity.ok(model);
         }

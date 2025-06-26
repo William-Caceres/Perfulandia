@@ -46,10 +46,10 @@ public class IncidenciaControllerIntegrationTest {
 
         when(inciServ.getAllIncidencias()).thenReturn(incidencias);
 
-        mockMvc.perform(get("/api/v2/incidencia/listar"))
+        mockMvc.perform(get("/api/v1/incidencia/listar"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3))
-                .andExpect(jsonPath("$[0].nombre_opinion").value("Puntilio"));
+                .andExpect(jsonPath("$[0].usuario").value("Puntilio"));
     }
 
     @Test
@@ -58,10 +58,21 @@ public class IncidenciaControllerIntegrationTest {
 
         when(inciServ.saveIncidencia(any(Incidencia.class))).thenReturn(inci);
 
-        mockMvc.perform(post("/api/v2/incidencia/crear")
+        mockMvc.perform(post("/api/v1/incidencia/crear")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(inci)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nombre_opinion").value("San Juan"));
+                .andExpect(jsonPath("$.usuario").value("San Juan"));
+    }
+
+    
+    @Test
+    void buscarIncidencia_porId_existente() throws Exception {
+        Incidencia inci = new Incidencia(1,"nombre","opinion","mejora",10);
+        when(inciServ.getSingleIncidencia(1)).thenReturn(inci);
+
+        mockMvc.perform(get("/api/v1/incidencia/buscar/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.usuario").value("nombre"));
     }
 }

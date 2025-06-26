@@ -37,27 +37,17 @@ public class CarritoControllerIntegrationTest {
     void agregarProducto_Carrito_responderConfirmacion() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
 
-        mockMvc.perform(post("/api/v2/carrito/agregar/1"))
+        mockMvc.perform(post("/api/v1/carrito/agregar/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Producto se agrego al carrito: Ejemplo"));
     }
 
     @Test
-    void verCarrito_mostrarProductosDentro() throws Exception {
-        when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
-        mockMvc.perform(post("/api/v2/carrito/agregar/1"));
-
-        mockMvc.perform(get("/api/v2/carrito/listar"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].nombre").value("Ejemplo"));
-    }
-
-    @Test
     void eliminarProducto_Carrito_responderCorrectamente() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
-        mockMvc.perform(post("/api/v2/carrito/agregar/1"));
+        mockMvc.perform(post("/api/v1/carrito/agregar/1"));
 
-        mockMvc.perform(delete("/api/v2/carrito/eliminar/1"))
+        mockMvc.perform(delete("/api/v1/carrito/eliminar/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Producto eliminado del carrito"));
     }
@@ -65,19 +55,39 @@ public class CarritoControllerIntegrationTest {
     @Test
     void vaciarCarrito_responderCorrectamente() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
-        mockMvc.perform(post("/api/v2/carrito/agregar/1"));
+        mockMvc.perform(post("/api/v1/carrito/agregar/1"));
 
-        mockMvc.perform(delete("/api/v2/carrito/vaciar"))
+        mockMvc.perform(delete("/api/v1/carrito/vaciar"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("El carrito se ha vaciado"));
     }
 
     @Test
-    void totalLibrosCarrito_debeRetornarCantidad() throws Exception {
+    void vaciarCompra_responderCorrectamente() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
-        mockMvc.perform(post("/api/v2/carrito/agregar/1"));
+        mockMvc.perform(post("/api/v1/carrito/agregar/1"));
 
-        mockMvc.perform(get("/api/v2/carrito/total"))
+        mockMvc.perform(delete("/api/v1/carrito/vcompra"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Carrito vaciado tras compra"));
+    }
+
+    @Test
+    void verCarrito_mostrarProductosDentro() throws Exception {
+        when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
+        mockMvc.perform(post("/api/v1/carrito/agregar/1"));
+
+        mockMvc.perform(get("/api/v1/carrito/listar"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].nombre").value("Ejemplo"));
+    }
+
+    @Test
+    void totalProductosCarrito_debeRetornarCantidad() throws Exception {
+        when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
+        mockMvc.perform(post("/api/v1/carrito/agregar/1"));
+
+        mockMvc.perform(get("/api/v1/carrito/total"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("1"));
     }

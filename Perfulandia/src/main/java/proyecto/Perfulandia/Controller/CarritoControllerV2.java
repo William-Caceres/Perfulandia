@@ -13,7 +13,6 @@ import proyecto.Perfulandia.Service.productoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import proyecto.Perfulandia.assemblers.CarritoModelAssembler;
 import proyecto.Perfulandia.assemblers.productoModelAssembler;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
@@ -27,12 +26,12 @@ import org.springframework.http.ResponseEntity;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v3/carrito")
+@RequestMapping("/api/v2/carrito")
 
 //Agregar anotacion Tag para darle nombre y descripcion a la API
 @Tag(name = "Carrto de compras y gestion de STOCK",
 description = "Operaciones sobre el carrito de compras")
-public class CarritoControllerV3 {
+public class CarritoControllerV2 {
     private final List<producto> carrito = new ArrayList<>();
 
     @Autowired
@@ -85,7 +84,7 @@ public class CarritoControllerV3 {
     description = "Quita todos los productos del carrito de compras, tambien restaura"+
     " el stock de estos antes de que fueran agregados al carro") 
 
-    @DeleteMapping("/vaciar")
+    @DeleteMapping(value = "/vaciar", produces = MediaTypes.HAL_JSON_VALUE)
     public ResponseEntity<String> vaciarCarrito(){
         for (producto producto : carrito) {
             int id = producto.getId();
@@ -108,7 +107,7 @@ public class CarritoControllerV3 {
             .map(assembler::toModel)
             .collect(Collectors.toList());
         return CollectionModel
-            .of(productos, linkTo(methodOn(CarritoControllerV3.class)
+            .of(productos, linkTo(methodOn(CarritoControllerV2.class)
             .verCarrito()).withSelfRel());
     }
     

@@ -1,7 +1,7 @@
 package proyecto.Perfulandia.assemblers;
 
 import proyecto.Perfulandia.Model.Incidencia;
-import proyecto.Perfulandia.Controller.IncidenciaControllerV3;
+import proyecto.Perfulandia.Controller.IncidenciaControllerV2;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.hateoas.EntityModel;
@@ -18,9 +18,9 @@ RepresentationModelAssembler<Incidencia, EntityModel<Incidencia>> {
     @Override
     public @NonNull EntityModel<Incidencia> toModel(Incidencia inci) {
         return EntityModel.of(inci,
-        linkTo(methodOn(IncidenciaControllerV3.class)
+        linkTo(methodOn(IncidenciaControllerV2.class)
         .buscarIncidencia(inci.getId())).withRel("buscar"),
-        linkTo(methodOn(IncidenciaControllerV3.class)
+        linkTo(methodOn(IncidenciaControllerV2.class)
         .listarIncidencias()).withRel("listar")
         );
     }

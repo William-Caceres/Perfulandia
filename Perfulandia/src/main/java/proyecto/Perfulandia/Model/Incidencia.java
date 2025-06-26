@@ -26,7 +26,7 @@ public class Incidencia {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     
-    private String nombre_opinion;
+    private String usuario;
     private String opinion;
     private String mejora;
     private int calificacion;

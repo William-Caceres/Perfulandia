@@ -46,7 +46,7 @@ public class NotificacionControllerIntegrationTest {
 
         when(notService.getAllNotificaciones()).thenReturn(notificacion);
 
-        mockMvc.perform(get("/api/v2/notificaciones"))
+        mockMvc.perform(get("/api/v1/notificaciones"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3))
                 .andExpect(jsonPath("$[0].nombre").value("Perfume"));
@@ -59,7 +59,7 @@ public class NotificacionControllerIntegrationTest {
 
         when(notService.saveNotificacion(any(Notificacion.class))).thenReturn(noti);
 
-        mockMvc.perform(post("/api/v2/notificaciones/crear")
+        mockMvc.perform(post("/api/v1/notificaciones/crear")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(noti)))
                 .andExpect(status().isOk())
@@ -75,9 +75,29 @@ public class NotificacionControllerIntegrationTest {
         );
         when(notService.getNotificacionesDestinatario("cliente_02")).thenReturn(notificacion);
 
-        mockMvc.perform(get("/api/v2/notificaciones/destinatario/cliente_02"))
+        mockMvc.perform(get("/api/v1/notificaciones/destinatario/cliente_02"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3))
                 .andExpect(jsonPath("$[1].mensaje").value("Se concreto la compra 02"));
     }
+
+    @Test
+    void buscarNotificacion_porId_existente() throws Exception {
+        Notificacion noti = new Notificacion(1,"usuario", "mensaje evniado al usuario");
+
+        when(notService.deleteNotificacion(1)).thenReturn("OK");
+
+        mockMvc.perform(delete("/api/v1/notificaciones/eliminar/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("OK"));
+    }
+
+    @Test
+    void eliminarNotificacion_responderCorrectamente() throws Exception {
+        Notificacion noti = new Notificacion(1, "usuario", "mensaje eliminar");
+
+        when(notService.getSingleNotificacion(1)).thenReturn(noti);
+
+    }
+
 }

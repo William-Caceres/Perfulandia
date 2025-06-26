@@ -29,11 +29,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.models.media.MediaType;
 
 @RestController
-@RequestMapping("/api/v3/notificaciones")
+@RequestMapping("/api/v2/notificaciones")
 
 @Tag(name = "Notificaciones",
 description = "Genera notificaciones (de momento solo una), sobre las distintas acciones que se realizan en la pagina")
-public class NotificacionControllerV3 {
+public class NotificacionControllerV2 {
 
     @Autowired
     private NotificacionService notificacionService;
@@ -51,7 +51,7 @@ public class NotificacionControllerV3 {
             .map(assembler::toModel)
             .collect(Collectors.toList());
         return CollectionModel
-            .of(notificaciones, linkTo(methodOn(NotificacionControllerV3.class)
+            .of(notificaciones, linkTo(methodOn(NotificacionControllerV2.class)
             .listar_notificaciones()).withSelfRel());
     }
 
@@ -74,7 +74,7 @@ public class NotificacionControllerV3 {
     public ResponseEntity<EntityModel<Notificacion>> crearNotificacion(@RequestBody Notificacion notificacion) {
         Notificacion crear = notificacionService.saveNotificacion(notificacion);
         return ResponseEntity
-            .created(linkTo(methodOn(NotificacionControllerV3.class)
+            .created(linkTo(methodOn(NotificacionControllerV2.class)
             .buscarNotificacion(crear.getId())).toUri()).body(assembler.toModel(crear));
     }
 
@@ -89,7 +89,7 @@ public class NotificacionControllerV3 {
             .map(assembler::toModel)
             .collect(Collectors.toList());
         return CollectionModel
-            .of(notiDesti, linkTo(methodOn(NotificacionControllerV3.class)
+            .of(notiDesti, linkTo(methodOn(NotificacionControllerV2.class)
             .notificacionesPorUsuario(destinatario)).withSelfRel());
     }
 
@@ -99,4 +99,13 @@ public class NotificacionControllerV3 {
     public ResponseEntity<Void> eliminarNotificacion(@PathVariable int id) {notificacionService.eliminarNotificacion(id);
     return ResponseEntity.noContent().build();}
     */
+
+    @Operation(summary = "Eliminar notificacion",
+    description = "Elimina una notificacion segun su id")
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarNotificacion(@PathVariable int id) {
+        notificacionService.deleteNotificacion(id);
+        return ResponseEntity.noContent().build();
+    }
 }

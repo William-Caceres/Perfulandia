@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,7 +17,7 @@ import proyecto.Perfulandia.Model.Incidencia;
 import proyecto.Perfulandia.Service.IncidenciaService;
 
 @RestController
-@RequestMapping("/api/v2/incidencia")
+@RequestMapping("/api/v1/incidencia")
 
 @Tag(name = "Incidencias",
 description = "Este controlador permite al usuario ingresar una incidencia/opinion sobre el sistema, a traves de un formulario")
@@ -35,6 +36,14 @@ public class IncidenciaController {
         return inciServ.getAllIncidencias();
     }
     
+    // 
+    @Operation(summary = "Buscar una Incidencia",
+    description = "Este metodo busca una incidencia en especifico segun la ID que le entreguemos")
+    @GetMapping("/buscar/{id}")
+        public Incidencia buscarIncidencia(@PathVariable int id) {
+            return inciServ.getSingleIncidencia(id);
+        }
+
     //GUARDAR
     @Operation(summary = "Crear incidencia",
     description = "Crea una incidencia en base a los datos ingresados por el usuario, se guarda en la BDD") 

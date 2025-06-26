@@ -39,11 +39,11 @@ import org.springframework.http.ResponseEntity;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v3/productos")
+@RequestMapping("/api/v2/productos")
 
 @Tag(name = "Productos",
 description = "Este archivo se encarga de GUARDAR, LISTAR, MODIFICAR, ELIMINAR productos en el sistema")
-public class productoControllerV3 {
+public class productoControllerV2 {
     
     @Autowired
     private productoService productoService;
@@ -62,7 +62,7 @@ public class productoControllerV3 {
             .map(assembler::toModel)
             .collect(Collectors.toList());
         return CollectionModel
-            .of(productos, linkTo(methodOn(productoControllerV3.class)
+            .of(productos, linkTo(methodOn(productoControllerV2.class)
             .listarProductos()).withSelfRel());
     }
 
@@ -74,7 +74,7 @@ public class productoControllerV3 {
     public ResponseEntity<EntityModel<producto>> agregarProducto(@RequestBody producto producto){
         producto crear = productoService.saveProducto(producto);
         return ResponseEntity
-            .created(linkTo(methodOn(productoControllerV3.class)
+            .created(linkTo(methodOn(productoControllerV2.class)
             .buscarProducto(crear.getId())).toUri()).body(assembler.toModel(crear));
     }
 
@@ -88,7 +88,6 @@ public class productoControllerV3 {
         producto prod = productoService.getSingleProduct(id);
         return assembler.toModel(prod);
     }
-
 
     /*
 

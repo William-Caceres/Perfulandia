@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/v2/notificaciones")
+@RequestMapping("/api/v1/notificaciones")
 
 @Tag(name = "Notificaciones",
 description = "Genera notificaciones (de momento solo una), sobre las distintas acciones que se realizan en la pagina")
@@ -36,6 +36,15 @@ public class NotificacionController {
     public List<Notificacion> listar_notificaciones() {
         return notificacionService.getAllNotificaciones();
     }
+
+    @Operation(summary = "Buscar notificacion singular",
+    description = "Este metodo busca una notificacion singular segun la ID que le entreguemos")
+
+    @GetMapping("/buscar/{id}")
+    public Notificacion buscarNotificacion(@PathVariable int id) {
+        return notificacionService.getSingleNotificacion(id);
+    }
+    
     // agregar endpoint para notificaciones
     @Operation(summary = "Generar notificacion",
     description = "Crea una notificacion en base a una accion que se haya realizado en la pagina,"+
@@ -56,10 +65,11 @@ public class NotificacionController {
         return notificacionService.getNotificacionesDestinatario(destinatario);
     }
 
-    // Metodo para eliminar las notificaciones del usuario conectado SIN USAR
-    /*
+    @Operation(summary = "Eliminar notificacion",
+    description = "Elimina una notificacion segun su id")
+
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminarNotificacion(@PathVariable int id) {notificacionService.eliminarNotificacion(id);
-    return ResponseEntity.noContent().build();}
-    */
+    public String eliminarNotificacion(@PathVariable int id) {
+        return notificacionService.deleteNotificacion(id);
+    }
 }

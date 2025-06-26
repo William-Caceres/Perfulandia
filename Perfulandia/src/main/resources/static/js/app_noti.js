@@ -1,4 +1,4 @@
-const API_NOT = "http://10.155.67.163:8080/api/v2/notificaciones";
+const API_NOT = "http://192.168.1.6:8080/api/v1/notificaciones";
 
 // Función para obtener las notificaciones del usuario.
 async function obtener_notificaciones() {
@@ -34,6 +34,9 @@ async function obtener_notificaciones() {
                         <td>${notificacion.destinatario}</td>
                         <td style="line-height: 1; overflow-wrap: break-word; word-break: normal; white-space: pre-line;">
                             ${notificacion.mensaje.replace(/\n/g, "<br>")}</td>
+                        <td> 
+                            <button onclick= "eliminarNoti(${notificacion.id})">Borrar notificacion</button>
+                        </td>
                     </tr>`;
                 tbody.innerHTML += fila;
             });
@@ -49,6 +52,14 @@ function redirigir_a_notificaciones() {
     window.location.href = "notificaciones.html";
 }
 
+function eliminarNoti(id) {
+    fetch(`${API_NOT}/eliminar/${id}`, {method: "DELETE"}).then(response => {
+        if (response.ok) {
+            alert("Se ha eliminado la Notificacion");
+            obtener_notificaciones();
+        }
+    });
+}
 // Funcion para eliminar la notificacion
 
 //me tiraba error, investigué y se debería solucionar con el comando window (espero funcione)
@@ -68,6 +79,10 @@ function eliminar_notificacion(id) {
     fetch(`${API_NOT}/eliminar/${id}`, {method: "DELETE"});
     alert("La notificación ha sido eliminada");
     obtener_notificaciones();
+}
+
+function eliminarNotificacion(id){
+    fetch
 }
 */
 

@@ -1,8 +1,8 @@
 const carrito = (() =>{
-    const API = "http://10.155.67.163:8080/api/v2/carrito";
+    const API = "http://192.168.1.6:8080/api/v1/carrito";
     async function listarCarrito() {
         try {
-            const response = await fetch(`${API_URL}/listar`);
+            const response = await fetch(`${API}/listar`);
             const Producto = await response.json();
             const tbody = document.querySelector("#tablaCarrito tbody");
             const totalItems = document.getElementById("totalCarrito");
@@ -70,13 +70,13 @@ const carrito = (() =>{
             return;
         }
         if(confirm(`"¿Desea confirmar la compra por ${total}?"`)){
-            await fetch(`${API}/vaciar`, {method: "DELETE"})
+            await fetch(`${API}/vcompra`, {method: "DELETE"})
             //Intento de generacion de notificacion 
             //Primero recuperamos el nombre del usuario
             const usuario = sessionStorage.getItem("nombreUsuario");
-             if (usuario) {
+            if (usuario != null) {
             // Crear notificación con un mensaje para el usuario :D
-            await fetch("http://localhost:8080/api/v2/notificaciones/crear", {
+            await fetch("http://192.168.1.6:8080/api/v1/notificaciones/crear", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

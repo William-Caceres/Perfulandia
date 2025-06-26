@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/v2/productos")
+@RequestMapping("/api/v1/productos")
 
 @Tag(name = "Productos",
 description = "Este archivo se encarga de GUARDAR, LISTAR, MODIFICAR, ELIMINAR productos en el sistema")

@@ -2,7 +2,7 @@ package proyecto.Perfulandia.assemblers;
 
 //Importar las clases necesarias para el modelo y controlador
 import proyecto.Perfulandia.Model.producto;
-import proyecto.Perfulandia.Controller.productoControllerV3;
+import proyecto.Perfulandia.Controller.productoControllerV2;
 
 //Importar las clases static para crear los enlaces HATEOAS
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
@@ -31,9 +31,9 @@ RepresentationModelAssembler<producto, EntityModel<producto>>{
     //Metodo para convertir un objeto de producto a una EntityModel. Usamos la anotacion NonNull para no aceptar valores nulos, usamos linkTo con el metodo methodOn para crear los enlaces HATEOAS para cada metodo REST del controller
     public @NonNull EntityModel<producto> toModel (producto producto){
         return EntityModel.of(producto,
-            linkTo(methodOn(productoControllerV3.class)
+            linkTo(methodOn(productoControllerV2.class)
             .buscarProducto(producto.getId())).withRel("buscar"),
-            linkTo(methodOn(productoControllerV3.class)
+            linkTo(methodOn(productoControllerV2.class)
             .listarProductos()).withRel("listar")
             );
     }

@@ -1,5 +1,5 @@
 //URL que permite que la API funcione
-const API_URL = "http://10.155.67.163:8080/api/v2/productos";
+const API_URL = "http://192.168.1.6:8080/api/v1/productos";
 
 //-funcion para listar ProductoS y ordenarlos en tarjetas (Catalogo)
 function listarProductos() {

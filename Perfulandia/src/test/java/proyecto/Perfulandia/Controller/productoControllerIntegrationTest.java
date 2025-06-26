@@ -46,7 +46,7 @@ public class productoControllerIntegrationTest {
 
         when(ProductoServ.getAllProductos()).thenReturn(productos);
 
-        mockMvc.perform(get("/api/v2/productos/listar"))
+        mockMvc.perform(get("/api/v1/productos/listar"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3))
                 .andExpect(jsonPath("$[0].nombre").value("Perfume"));
@@ -58,7 +58,7 @@ public class productoControllerIntegrationTest {
 
         when(ProductoServ.saveProducto(any(producto.class))).thenReturn(prod);
 
-        mockMvc.perform(post("/api/v2/productos/crear")
+        mockMvc.perform(post("/api/v1/productos/crear")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(prod)))
                 .andExpect(status().isOk())
@@ -71,7 +71,7 @@ public class productoControllerIntegrationTest {
 
         when(ProductoServ.getSingleProduct(5)).thenReturn(prod);
 
-        mockMvc.perform(get("/api/v2/productos/buscar/5"))
+        mockMvc.perform(get("/api/v1/productos/buscar/5"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nombre").value("Producto 05"));
     }
@@ -93,7 +93,7 @@ public class productoControllerIntegrationTest {
     void totalProductos_debeRetornarCantidad() throws Exception {
         when(ProductoServ.totalProductos()).thenReturn(10);
 
-        mockMvc.perform(get("/api/v2/productos/total"))
+        mockMvc.perform(get("/api/v1/productos/total"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("10"));
     }
