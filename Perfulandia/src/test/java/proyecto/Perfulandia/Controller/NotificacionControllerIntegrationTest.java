@@ -85,19 +85,22 @@ public class NotificacionControllerIntegrationTest {
     void buscarNotificacion_porId_existente() throws Exception {
         Notificacion noti = new Notificacion(1,"usuario", "mensaje evniado al usuario");
 
-        when(notService.deleteNotificacion(1)).thenReturn("OK");
+        when(notService.getSingleNotificacion(1)).thenReturn(noti);
 
-        mockMvc.perform(delete("/api/v1/notificaciones/eliminar/1"))
+        mockMvc.perform(get("/api/v1/notificaciones/buscar/1"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("OK"));
+                .andExpect(jsonPath("$.destinatario").value("usuario"));
     }
 
     @Test
     void eliminarNotificacion_responderCorrectamente() throws Exception {
         Notificacion noti = new Notificacion(1, "usuario", "mensaje eliminar");
 
-        when(notService.getSingleNotificacion(1)).thenReturn(noti);
+        when(notService.deleteNotificacion(1)).thenReturn("OK");
 
+        mockMvc.perform(delete("/api/v1/notificaciones/eliminar/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("OK"));
     }
 
 }
