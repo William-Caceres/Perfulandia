@@ -17,6 +17,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+// Anotación para indicar que se van a hacer pruebas de integración al controlador CarritoController
 @WebMvcTest(CarritoController.class)
 public class CarritoControllerIntegrationTest {
     
@@ -34,6 +35,8 @@ public class CarritoControllerIntegrationTest {
     }
 
     @Test
+
+    // Prueba para verificar que se puede agregar un producto al carrito
     void agregarProducto_Carrito_responderConfirmacion() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
 
@@ -42,6 +45,7 @@ public class CarritoControllerIntegrationTest {
                 .andExpect(content().string("Producto se agrego al carrito: Ejemplo"));
     }
 
+     // Prueba para verificar que se puede eliminar un producto del carrito
     @Test
     void eliminarProducto_Carrito_responderCorrectamente() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
@@ -52,6 +56,7 @@ public class CarritoControllerIntegrationTest {
                 .andExpect(content().string("Producto eliminado del carrito"));
     }
 
+    // Prueba para verificar que se puede vaciar el carrito correctamente
     @Test
     void vaciarCarrito_responderCorrectamente() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
@@ -62,6 +67,7 @@ public class CarritoControllerIntegrationTest {
                 .andExpect(content().string("El carrito se ha vaciado"));
     }
 
+    //Prueba para comprobar que el carrito quede vacio despues de una compra
     @Test
     void vaciarCompra_responderCorrectamente() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
@@ -72,6 +78,7 @@ public class CarritoControllerIntegrationTest {
                 .andExpect(content().string("Carrito vaciado tras compra"));
     }
 
+    //Prueba para mostrar los productos que estan DENTRO del carrito
     @Test
     void verCarrito_mostrarProductosDentro() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);
@@ -82,6 +89,7 @@ public class CarritoControllerIntegrationTest {
                 .andExpect(jsonPath("$[0].nombre").value("Ejemplo"));
     }
 
+    //Prueba para verificar que se retorna correctamente la cantidad de productos dentro del carrito
     @Test
     void totalProductosCarrito_debeRetornarCantidad() throws Exception {
         when(prodService.getSingleProduct(1)).thenReturn(prodEjemplo);

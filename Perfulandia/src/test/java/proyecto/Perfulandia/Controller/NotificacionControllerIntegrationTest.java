@@ -53,6 +53,7 @@ public class NotificacionControllerIntegrationTest {
     }
     */
 
+    // Prueba para crear una notificación correctamente
     @Test
     void crearNotificacion_retornarGuardar() throws Exception {
         Notificacion noti = new Notificacion(4,"Cliente de prueba","Mensaje de prueba");
@@ -66,6 +67,7 @@ public class NotificacionControllerIntegrationTest {
                 .andExpect(jsonPath("$.destinatario").value("Cliente de prueba"));
     }
 
+    // Prueba para buscar una notificación por su destinatario
     @Test
     void buscarNotificacion_porDestinatario() throws Exception {
         List<Notificacion> notificacion = List.of(
@@ -81,6 +83,7 @@ public class NotificacionControllerIntegrationTest {
                 .andExpect(jsonPath("$[1].mensaje").value("Se concreto la compra 02"));
     }
 
+    //Prueba para buscar notificación por su ID
     @Test
     void buscarNotificacion_porId_existente() throws Exception {
         Notificacion noti = new Notificacion(1,"usuario", "mensaje evniado al usuario");
@@ -92,6 +95,7 @@ public class NotificacionControllerIntegrationTest {
                 .andExpect(jsonPath("$.destinatario").value("usuario"));
     }
 
+    //Prueba para elinminar una notificación existente
     @Test
     void eliminarNotificacion_responderCorrectamente() throws Exception {
         Notificacion noti = new Notificacion(1, "usuario", "mensaje eliminar");

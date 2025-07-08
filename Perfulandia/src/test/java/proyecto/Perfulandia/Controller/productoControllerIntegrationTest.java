@@ -65,6 +65,7 @@ public class productoControllerIntegrationTest {
                 .andExpect(jsonPath("$.nombre").value("Crema2"));
     }
 
+    //Prueba para buscar un producto por su ID
     @Test
     void buscarProducto_porId_existente() throws Exception {
         producto prod = new producto(5,3000,"Producto 05","Marca Morada","Rectangular","USA",50,50,"imagen4.jpg");
@@ -89,6 +90,7 @@ public class productoControllerIntegrationTest {
     }
     */
 
+    //Prueba para verificar que retorne la cantidad correcta total de productos
     @Test
     void totalProductos_debeRetornarCantidad() throws Exception {
         when(ProductoServ.totalProductos()).thenReturn(10);

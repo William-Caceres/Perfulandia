@@ -36,6 +36,7 @@ public class IncidenciaControllerIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    //Prueba para verificar que la lista de incidencias se retorna correctamente como un JSON 
     @Test
     void listarProductos_debeRetornarListaJson() throws Exception {
         List<Incidencia> incidencias = List.of(
@@ -52,6 +53,7 @@ public class IncidenciaControllerIntegrationTest {
                 .andExpect(jsonPath("$[0].usuario").value("Puntilio"));
     }
 
+    // Prueba para verificar que una incidencia sea guardadad correctamente
     @Test
     void agregarProducto_debeGuardarYRetornarProducto() throws Exception {
         Incidencia inci = new Incidencia(4,"San Juan","No recuerdo nada sobre este lugar, odio eso","Sigue existiendo ese resfalin?",1);
@@ -65,7 +67,7 @@ public class IncidenciaControllerIntegrationTest {
                 .andExpect(jsonPath("$.usuario").value("San Juan"));
     }
 
-    
+    // Prueba para buscar una incidencia por id
     @Test
     void buscarIncidencia_porId_existente() throws Exception {
         Incidencia inci = new Incidencia(1,"nombre","opinion","mejora",10);
