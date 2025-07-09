@@ -1,5 +1,5 @@
 //URL que permite que la API funcione
-const API_URL = "http://192.168.1.88:8080/api/v1/productos";
+const API_URL = "http://192.168.1.10:8080/api/v1/productos";
 
 //-funcion para listar ProductoS y ordenarlos en tarjetas (Catalogo)
 function listarProductos() {
@@ -8,27 +8,52 @@ function listarProductos() {
         .then(productos => {
             const catalogo = document.getElementById("catalogo-productos");
             catalogo.innerHTML = ""; // LIMPIA contenido anterior
-
+            
             productos.forEach(producto => {
-                const tarjeta = `
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title" style="text-align: center;">${producto.nombre}</h5>
-                                <p class="card-text">-${producto.marca}-</p>
-                                <p class="card-text">Modelo ${producto.modelo}</p>
-                                <p class="card-text">Hecho en ${producto.paisOrigen}</p>
-                                <p class="card-text">contenido: ${producto.ml}ml</p>
-                                <p class="card-text">Stock disponible: ${producto.stock}</p>
-                                <h5 class="card-text">$${producto.precio}</h5>
-                                <img src="imagenes/${producto.r_img}"width="100%" height="200px">
+                const ros = producto.stock;
+                if(ros > 0) {
+                    const tarjeta = `
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="text-align: center;">${producto.nombre}</h5>
+                                    <img src="imagenes/${producto.r_img}"width="100%" height="250px" style="margin-bottom: 10px;">
+                                    <p class="card-text">-${producto.marca}-</p>
+                                    <p class="card-text">Modelo ${producto.modelo}</p>
+                                    <p class="card-text">Hecho en ${producto.paisOrigen}</p>
+                                    <p class="card-text">contenido: ${producto.ml}ml</p>
+                                    <p class="card-text">Stock disponible: ${producto.stock}</p>
+                                    <h5 class="card-text">$${producto.precio}</h5>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id}); listarProductos()">Agregar al carro</button>
+                                </div>
                             </div>
-                            <div class="card-footer">
-                                <button class="btn btn-success btn-sm" onclick="carrito.agregarProducto(${producto.id}); listarProductos()">Agregar al carro</button>
+                        </div>`;
+                    catalogo.innerHTML += tarjeta;
+                } else {
+                    const tarjeta = `
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="text-align: center;">${producto.nombre}</h5>
+                                    <img src="imagenes/${producto.r_img}"width="100%" height="250px" style="margin-bottom: 10px;">
+                                    <p class="card-text">-${producto.marca}-</p>
+                                    <p class="card-text">Modelo ${producto.modelo}</p>
+                                    <p class="card-text">Hecho en ${producto.paisOrigen}</p>
+                                    <p class="card-text">contenido: ${producto.ml}ml</p>
+                                    <p class="card-text">Stock disponible: ${producto.stock}</p>
+                                    <h5 class="card-text">$${producto.precio}</h5>
+                                    
+                                </div>
+                                <div class="card-footer">
+                                    <p class="card-text">- NO DISPONIBLE -</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>`;
-                catalogo.innerHTML += tarjeta;
+                        </div>`;
+                    catalogo.innerHTML += tarjeta;
+                }
+                
             });
         });
 }

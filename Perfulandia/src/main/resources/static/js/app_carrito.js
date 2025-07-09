@@ -1,5 +1,5 @@
 const carrito = (() =>{
-    const API = "http://192.168.1.88:8080/api/v1/carrito";
+    const API = "http://192.168.1.10:8080/api/v1/carrito";
     async function listarCarrito() {
         try {
             const response = await fetch(`${API}/listar`);
@@ -76,7 +76,7 @@ const carrito = (() =>{
             const usuario = sessionStorage.getItem("nombreUsuario");
             if (usuario != null) {
             // Crear notificación con un mensaje para el usuario :D
-            await fetch("http://192.168.1.88/api/v1/notificaciones/crear", {
+            await fetch("http://192.168.1.10:8080/api/v1/notificaciones/crear", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

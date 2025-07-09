@@ -1,4 +1,4 @@
-const API_INS = "http://192.168.1.88:8080/api/v1/incidencia"
+const API_INS = "http://192.168.1.10:8080/api/v1/incidencia"
 
 function registrarIncidencia(){
     if (sessionStorage.getItem("nombreUsuario") != null) {
